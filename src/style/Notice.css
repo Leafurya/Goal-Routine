@@ -1,0 +1,94 @@
+.notice_background{
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(156, 156, 156, 0.5);
+    z-index: 3;
+
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.platform_base{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: #947fda;
+	box-sizing: content-box;
+}
+.platform_base .article{
+    display: flex;
+    width: 100%;
+    color: white;
+    font-size: medium;
+    text-align: center;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0 20px 0;
+}
+.platform_base > input{
+    flex: 40px;
+}
+
+
+
+/* .platform_base .article{
+    position: relative;
+} */
+
+.prompt_platform{
+    grid-template-rows: 1fr 40px 40px;
+}
+.prompt_platform input[type=text]{
+    top: 0;
+    width: 80%;
+    font-size: medium;
+    margin: 0;
+}
+.prompt_platform .okcancel, .confirm_platform .okcancel{
+    display: flex;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+}
+.prompt_platform .okcancel input, .confirm_platform .okcancel input{
+    flex:1;
+}
+
+@keyframes toast{
+	0%{
+		opacity: 1;
+	}
+	85%{
+		opacity: 1;
+	}
+	100%{
+		opacity: 0;
+		display: none;
+	}
+}
+.uniqe_toast{
+	animation-name: toast;
+	animation-duration: 2.5s;
+	animation-fill-mode: forwards;
+	position:absolute;
+	background-color: rgb(243, 243, 243);
+	color: black;
+	font-size: large;
+	padding: 10px 20px;
+	border-radius: 10px;
+	transform: translateX(-50%);
+	left: 50%;
+	text-align: center;
+	width:80%;
+	top:20px;
+}
+#prompt_text_input{
+	color:white;
+}
+#prompt_text_input::placeholder{
+	color:rgba(255, 255, 255, 0.541);
+}

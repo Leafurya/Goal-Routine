@@ -1,0 +1,12 @@
+.top_navi{
+	width:100%;
+}
+.top_navi_title h2{
+	margin-bottom: 12px;
+}
+.top_navi_title{
+	display: flex;
+	flex-direction: column;
+	padding:5px 0px 5px 15px;
+	border-bottom: 2px solid rgb(255, 255, 255);
+}

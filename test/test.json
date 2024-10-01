@@ -1,0 +1,119 @@
+{
+	"운동하자": {
+		"name": "운동하자",
+		"version": 2,
+		"D": "+",
+		"tasks": {
+			"운동하자(팔굽 하나라도)": false
+		},
+		"day": 335,
+		"stat": {
+			"taskCount": 336,
+			"checkedTaskCount": 242
+		},
+		"state": 3,
+		"taskDone": false,
+		"lastTasks": {}
+	},
+	"아침 스트레칭": {
+		"name": "아침 스트레칭",
+		"version": 2,
+		"D": "+",
+		"tasks": {
+			"침대에서 1번 고관절 스트레칭": false,
+			"침대에서 2번 고관절 스트레칭": false,
+			"일어나서 햄스트링 스트레칭": false,
+			"자세잡기 푸쉬업 5회": false,
+			"침대에서 고양이 기지개": false
+		},
+		"day": 194,
+		"description": "개운한 하루의 시작",
+		"stat": {
+			"taskCount": 970,
+			"checkedTaskCount": 456
+		},
+		"state": 3,
+		"taskDone": false,
+		"lastTasks": {}
+	},
+	"영양제 챙겨먹기": {
+		"name": "영양제 챙겨먹기",
+		"version": 2,
+		"D": "+",
+		"tasks": {
+			"혈압약": false,
+			"맥주효모": false
+		},
+		"day": 146,
+		"description": "건강하게...",
+		"stat": {
+			"taskCount": 292,
+			"checkedTaskCount": 166
+		},
+		"state": 3,
+		"taskDone": false,
+		"lastTasks": {}
+	},
+	"콩지랑 함께한지": {
+		"name": "콩지랑 함께한지",
+		"version": 2,
+		"D": "+",
+		"tasks": {
+			"❤": false
+		},
+		"day": 137,
+		"description": "2024.2.15~",
+		"stat": {
+			"taskCount": 137,
+			"checkedTaskCount": 110
+		},
+		"state": 3,
+		"taskDone": false,
+		"lastTasks": {}
+	},
+	"물마시기": {
+		"name": "물마시기",
+		"version": 2,
+		"D": "+",
+		"tasks": {
+			"250ml 1": false,
+			"250ml 2": false,
+			"250ml 3": false,
+			"250ml 4": false,
+			"250ml 5": false,
+			"250ml 6": false,
+			"250ml 7": false,
+			"250ml 8": false,
+			"250ml 9": false,
+			"250ml 10": false
+		},
+		"day": 46,
+		"description": "",
+		"stat": {
+			"taskCount": 460,
+			"checkedTaskCount": 143
+		},
+		"state": 3,
+		"taskDone": false,
+		"lastTasks": {}
+	},
+	"배달 X": {
+		"name": "배달 X",
+		"version": 2,
+		"D": "-",
+		"tasks": {
+			"밥 해먹기 1": false,
+			"밥 해먹기 2": false,
+			"배달 생각나면 물마시기": false
+		},
+		"day": 0,
+		"description": "돈 아끼자\n돈은 꼭 필요한 곳에 쓰자\n배달은 없어도 된다",
+		"stat": {
+			"taskCount": 12,
+			"checkedTaskCount": 2
+		},
+		"state": 0,
+		"taskDone": false,
+		"lastTasks": {}
+	}
+}

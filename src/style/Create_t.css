@@ -1,0 +1,361 @@
+textarea.input{
+	border: none;
+	font-size: x-large;
+	text-align: center;
+	/* width: 75%; */
+	margin-bottom: 20px;
+}
+input[type=text]{
+	border: none;
+	font-size: x-large;
+	text-align: center;
+	/* width: 75%; */
+	margin-bottom: 20px;
+}
+/* .borad{
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	width: 100%;
+}
+.borad .main_platform{
+	overflow-y: scroll;
+	flex: 1 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: nowrap;
+	height:500px;
+	padding: 50px 0;
+} */
+input[type=date]::-webkit-calendar-picker-indicator{
+	color: white;
+}
+input[type=date]::-webkit-calendar-picker-text{
+	display:none;
+	color: white;
+	
+}
+input[type=date]{
+	font-size: large;
+	border: none;
+	background: none;
+	/* text-align: center; */
+	display: inline-block;
+	width:auto;
+}
+/* input[type=number]{
+	width: 50px;
+	font-size: x-large;
+	border: none;
+	text-align: center;
+	padding: 0 7px 0 0;
+} */
+textarea::placeholder{
+	color: rgb(69, 69, 69);
+}
+textarea{
+	resize: none;
+	font-size: large;
+	box-sizing: border-box;
+	text-align: center;
+	color: white;
+	background:none;
+	border: none;
+}
+#prj_cntnt{
+	width: 100%;
+	height: 100px;
+}
+input[type=text]:focus,input[type=number]:focus,textarea:focus,input[type=date]:focus{
+	outline: none;
+}
+.task_input_ul{
+	padding: 0;
+	/* position: relative; */
+	/* max-height: 150px; */
+	margin: 0;
+	/* overflow: scroll; */
+	/* max-height:200px;
+	overflow-y: scroll; */
+}
+#last_task_inputs{
+	width: 100%;
+}
+.task_input_ul input[type=text]{
+	width: 50%;
+}
+/* .task_input_div{
+	display: flex;
+} */
+
+.task_div input[type=button]{
+	padding: 7px 7px 3px 7px;
+	flex: 1;
+}
+.task_div input[type=text]{
+	margin: 0;
+	font-size: medium;
+	flex: 6;
+}
+
+.type_choice{
+	display: flex;
+	justify-content: center;
+	margin-top: 30px;
+}
+.function_btns{
+	display: flex;
+	width: 100%;
+	margin-top:auto; 
+}
+/* .function_btn:first-child:nth-last-child(2),
+.function_btn:first-child:nth-last-child(2) ~ .function_btn{
+	width: 50%;
+}
+.function_btn:first-child:nth-last-child(3),
+.function_btn:first-child:nth-last-child(3) ~ .function_btn{
+	width: 33.33%;
+}
+.function_btn:first-child:nth-last-child(4),
+.function_btn:first-child:nth-last-child(4) ~ .function_btn{
+	width: 25%;
+} */
+.function_btn{
+	height: 50px;
+	font-size: large;
+	border: none;
+	flex: 1;
+	color: #e8e9ec;
+	background-color: #7965bd;
+	box-sizing: border-box;
+	margin:10px;
+}
+
+
+
+.type_choice > span{
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	border-bottom: 1px solid gray;
+}
+.task_div{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 30px;
+}
+/* .input[type=button]{
+	display:none;
+} */
+.disabled{
+	display: none;
+}
+.task_div label{
+	display: flex;
+}
+.task_div label input{
+	margin: 0;
+}
+.task_div li{
+	margin-top: 10px;
+}
+.disabled_background{
+	background: none;
+	background-color: rgba(0, 0, 0, 0.137);
+}
+
+.tabmenu input:checked ~ label{
+	background:#ccc;
+}
+.tabmenu input:checked ~ .tabCon{
+	display:block;
+}
+
+.info_part{
+	flex:1;
+	width:100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.info_part .day_pick{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.info_part .day_pick h1{
+	font-size: 3em;
+	margin:0;
+	display: inline-block;
+}
+.info_part .day_pick select:focus{
+	outline: none;
+}
+.info_part .day_pick select{
+	background-color: #947fda;
+	border: none;
+	font-size: 3em;
+	text-align-last: center;
+	text-align: center;
+	-ms-text-align-last: center;
+	-moz-text-align-last: center;
+	font-weight: bold;
+}
+/* .info_part .day_pick select option{
+	background-color: #947fda;
+	text-align-last: center;
+	text-align: center;
+	-ms-text-align-last: center;
+	-moz-text-align-last: center;
+} */
+/* #prj_day::placeholder{
+	color: rgb(235, 235, 235);
+} */
+#prj_day{
+	height:1px;
+	width:1px;
+	background: none;
+	color:none;
+	caret-color: transparent;
+	border:none;
+	box-sizing: border-box;
+}
+.info_part .day_pick label[for=prj_day]{
+	font-size: 3em;
+	background: none;
+	font-weight: bold;
+	padding: 0;
+	width:150px;
+	overflow-wrap: normal;
+}
+
+#prj_name::placeholder{
+	color:rgba(255, 255, 255, 0.5);
+}
+#prj_name{
+	background:none;
+	color:white;
+}
+.task_part{
+	padding: 0;
+	width: 90%;
+	flex:1;
+	margin:0;
+	overflow-y: scroll;
+	padding: 0 15px;
+	box-sizing: border-box;
+
+	border: none;
+	background-color: #947fda;
+	box-shadow: -7px -7px 16px 0px #5b5a5b;
+}
+
+
+
+.tabmenu{ 
+  max-width:600px; 
+  position:relative; 
+}
+.tabmenu ul{ 
+  position: relative;
+}
+.tabmenu ul li{
+  display:  inline-block;
+  width:50%; 
+  float:left;  
+  text-align:center; 
+  background :#f9f9f9;
+  line-height:40px;
+}
+.tabmenu label{
+  display:block;
+  width:100%; 
+  height:40px;
+  line-height:40px;
+}
+/* .tabmenu input{display:none;} */
+.tabCon{
+  display:none; 
+  width: 100%;
+  text-align:left; 
+  padding: 20px;
+  position:absolute; 
+  left:0; top:40px; 
+  box-sizing: border-box; 
+  border : 5px solid #f9f9f9;
+}
+/* .tabmenu input:checked ~ label{
+  background:#ccc;
+}
+.tabmenu input:checked ~ .tabCon{
+  display:block;
+} */
+
+.task_tabmenu{
+	display: flex;
+	margin-bottom: 10px;
+	/* padding: 10px 0; */
+	height:47px;
+	border-bottom: 1px solid rgb(121, 101, 189);;
+}
+.task_tabmenu input[type=radio]{
+	display: none;
+}
+.task_tabmenu .tab_radio_label{
+	flex: 1;
+	text-align: center;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+/* .task_tabmenu input[type=radio]:checked ~ label{
+	background-color:#7965bd;
+} */
+.task_input_div, .add_task{
+	display: flex;
+	width:100%;
+	margin-bottom: 10px;
+	border-bottom: 1px dotted white;
+}
+.tab_cont ul textarea.input, .add_task textarea.input{
+	width:85%;
+	margin:0;
+	background: none;
+	color:white;
+	padding: 5px 20px;
+}
+/* .tab_cont ul input[type=text], .add_task input[type=text]{
+	width:85%;
+	margin:0;
+	background: none;
+	color:white;
+	padding: 5px 20px;
+} */
+.add_task textarea.input::placeholder{
+	color: rgba(255, 255, 255, 0.5);
+}
+.tab_cont ul textarea.input{
+	color:white;
+}
+/* .tab_cont ul input[type=text], .add_task input[type=text]::placeholder{
+	color: white;
+} */
+.tab_cont ul input[type=button], .add_task input[type=button]{
+	width:15%;
+	background: none;
+	border:none;
+	color:white;
+	font-size: x-large;
+}
+.task_input_div input[type=button]:disabled{
+	color: transparent;
+}
+
+.empty{
+	color: rgba(255, 255, 255, 0.5);
+}

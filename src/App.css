@@ -1,0 +1,30 @@
+@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+body{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	font-size: x-large;
+	overflow:hidden;
+	font-family: 'Jeju Gothic', sans-serif;
+	
+	
+	-webkit-user-select: none !important; 
+	-moz-user-select: -moz-none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+}
+li{
+	list-style: none;
+}
+.App{
+	display: flex;
+	position: absolute;
+	overflow:hidden;
+	height: 100%;
+	width: 100%;
+	background-color: #E3E9FF;
+	/* background-color: #7965bd; */
+}
+textarea,input{
+	font-family: 'Jeju Gothic', sans-serif;
+}

@@ -1,0 +1,10 @@
+.bar_base{
+	width:100%;
+	height:3px;
+}
+.bar_prj_done{
+	background-color: white;
+}
+.bar_wait{
+	background: none;
+}

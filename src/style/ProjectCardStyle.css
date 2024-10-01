@@ -1,0 +1,102 @@
+.card input{
+	width: 100%;
+	display: none;
+}
+
+.card{
+	width: 100%;
+	padding: 0 10px;
+	margin: 0 0 25px 0 !important;
+	box-sizing: border-box;
+	background-color: white;
+	
+}
+.card > div{
+	background-color: rgb(255, 255, 255);
+	/* background-color: #947fda; */
+	box-sizing: border-box;
+	padding:5px 5px 0 5px;
+}
+/* .project_list_li{
+	width: 100%;
+	padding:10px;
+	box-sizing: border-box;
+}
+.project_list_li > div{
+	background-color: rgb(255, 255, 255);
+	/* background-color: #947fda; */
+	/* box-sizing: border-box;
+	padding:5px 5px 0 5px;
+} */ 
+
+
+.card .func_btns{
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.card .func_btns>div{
+	position: absolute;
+	display: flex;
+	transform: translateY(50%);
+	bottom: 0;
+}
+.card .func_btns label{
+	/* position: absolute; */
+	display: flex;
+	flex:1;
+	justify-content: center;
+	padding:5px;
+	align-items: center;
+}
+
+.card .func_btns label span{
+	font-size: medium;
+	background-color: #AF7EEB;
+	/* background-color: #7965bd; */
+	/* border-bottom:2px solid #7965bd; */
+	/* box-sizing: content-box; */
+	/* width:100%; */
+	text-align: center;
+	padding:10px 25px;
+	border-radius: 15px;
+}
+
+
+.card div.title label{
+	display: flex;
+	flex:1;
+}
+.card *{
+	color: black;
+}
+/* .project_list_li div.title label{
+	display: flex;
+	flex:1;
+}
+.project_list_li *{
+	color: black;
+} */
+ul.task_list{
+	padding: 10px 10px 0 10px;
+	margin:0;
+}
+ul.task_list .task{
+	font-size: large;
+	display: flex;
+	align-items: center;
+	margin: 10px 0;
+}
+
+ul.task_list .check_box{
+	width: 7px;
+	height:7px;
+	border: 2px solid black;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.checked>.check_box{
+	background-color: #af7eebaf;
+}
