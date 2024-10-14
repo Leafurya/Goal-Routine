@@ -26,7 +26,7 @@ export default ()=>{
 					// // let test=new ProjectBundle(data)
 				}).then((data)=>{
 					console.log(data)
-					share.projectLists.setProjectBundle(new ProjectBundle(data))
+					share.app.setProjectBundle(new ProjectBundle(data))
 				})
 				// const data=await res.text()
 				// console.log(getCookie("api_sid"))
