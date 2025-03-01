@@ -1,7 +1,7 @@
 import './App.css';
 import Lobby from './component/Lobby.js';
 import Project from './component/Project.js';
-import Create from './component/Create.js';
+import Create, { Modify } from './component/Create.js';
 import React, {useCallback, useEffect,useRef,useState} from "react";
 import ProjectModule from './modules/Project/Interface.js'
 
@@ -18,6 +18,7 @@ import { Toast } from './component/Notices.js';
 // import { jwtDecode } from 'jwt-decode';
 // import { Authentication } from './module/global/Auth.js';
 import { share } from './module/global/ShareMethod.js';
+import { Delete } from './component/Delete.js';
 // import { ProjectBundle } from './module/data/DataBundle.js';
 
 function App() {
@@ -76,9 +77,11 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Lobby/>}></Route>
 					<Route path="/Create" element={<Create/>}></Route>
-					<Route path="/Project" element={<Project/>}></Route>
+					<Route path="/Modify" element={<Modify/>}></Route>
+					<Route path="/Delete" element={<Delete/>}></Route>
+					{/* <Route path="/Project" element={<Project/>}></Route>
 					<Route path="/ToDoToday" element={<ToDoToday/>}></Route>
-					<Route path="/ToDoModify" element={<ToDoModify/>}></Route>
+					<Route path="/ToDoModify" element={<ToDoModify/>}></Route> */}
 				</Routes>
 			</BrowserRouter>
 			<Toast></Toast>

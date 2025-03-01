@@ -1,7 +1,7 @@
 import Project,{STATE_CONST} from "./Project.js";
 import {getDaysBetween} from "./Date.js";
 
-const projects={};
+const projects=[];
 
 /*
 ,
@@ -41,7 +41,10 @@ const projects={};
 function CreateProject(formData){
 	let {id,title,start,end,type,state,items}=formData;
 	let today=new Date();
-	id=parseInt(id??today.getTime());
+	// id=parseInt(id??today.getTime());
+	// projects.push(1)
+	console.log("create id",id);
+	id=(id??projects.length);
 	let project=new Project(id,title,start,end,type,today.toLocaleDateString(),state??STATE_CONST.start);
 	items.map((itemGroup,groupIdx)=>{
 		project.createItemGroup(groupIdx);
@@ -49,24 +52,24 @@ function CreateProject(formData){
 			project.addItem(groupIdx,item);
 		})
 	})
-	// projects.push(project);
 	projects[id]=project;
+	// projects[id]=project;
 	return id;
 }
 function UpdateProjects(){
-	if(Object.keys(projects).length<1){
+	if(projects.length<1){
 		return false;
 	}
-	let today=new Date();
+	let today=new Date("2025. 3. 5.");
 	let lastDate=localStorage.getItem("oldDate")??today.toLocaleDateString();
 	// console.log(lastDate);
 	today=today.toLocaleDateString();
 	if(getDaysBetween(lastDate,today)==0){
 		return true;
 	}
-	console.log("update. init");
+	// console.log("update. init");
 	// projects.map((project,idx)=>{
-	Object.values(projects).map((project,idx)=>{
+	projects.map((project,idx)=>{
 		project.update(today);
 	});
 	lastDate=today;
@@ -77,8 +80,8 @@ async function LoadProjects(){
 	let today=new Date();
 	today=today.toLocaleDateString();
 	let projectData = JSON.parse(localStorage.getItem("project")??`
-	{
-		"0":{
+	[
+		{
 			"id":0,
 			"title":"",
 			"type":"todo",
@@ -86,23 +89,29 @@ async function LoadProjects(){
 			"end":null,
 			"items":[[],[]]
 		}
-	}
+	]
 	`);
-	Object.values(projectData).map((project,idx)=>{
+	projectData.map((project,idx)=>{
 		CreateProject(project);
 	});
+
+	localStorage.setItem("oldDate",today);
 	// console.log("create project");
 }
 async function SavePorjects(){
-	let projectDatas={};
-	Object.values(projects).map((project,idx)=>{
-		projectDatas[project.getID()]=project.getProps();
+	let projectDatas=[];
+	console.log("save",projects);
+	projects.map((project,idx)=>{
+		projectDatas[idx]=project.getProps();
 	});
 	localStorage.setItem("project",JSON.stringify(projectDatas));
+
+	let today=new Date();
+	localStorage.setItem("oldDate",today.toLocaleDateString());
 }
 function GetAllProjectData(){
 	let projectDatas=[];
-	Object.values(projects).map((project,idx)=>{
+	projects.map((project,idx)=>{
 		projectDatas.push(project.getData());
 	});
 	return projectDatas;
@@ -131,14 +140,16 @@ function RemoveProject(id){
 	projects.splice(id,1);
 }
 function GetIDs(){
-	let ids=[];
+	// let ids=[];
 	// projects.map((project,idx)=>{
 	// 	ids.push(project.getID());
 	// });
-	Object.keys(projects).map((key,idx)=>{
-		ids.push(parseInt(key));
-	});
-	return ids;
+	// Object.keys(projects).map((key,idx)=>{
+	// 	ids.push(parseInt(key));
+	// });
+	// ids=Object.keys(projects);
+	
+	return Object.keys(projects);
 }
 function GetDaysBetween(date1,date2){
 	return getDaysBetween(date1,date2);

@@ -71,6 +71,7 @@ export default class Project{
 				}
 				else if(day<0){
 					this.#state=STATE_CONST.finish;
+					return "종료";
 				}
 				return "D-"+day;
 		}
@@ -91,6 +92,10 @@ export default class Project{
 	}
 	getData(){
 		let nowItemsIdx=this.getNowItemsIdx();
+		let tiems=this.#items[nowItemsIdx];
+		if(this.#state===STATE_CONST.finish){
+			tiems=null;
+		}
 		return{
 			id:this.#id,
 			title:this.#title,
@@ -100,7 +105,7 @@ export default class Project{
 			current:this.#current,
 			day:this.getDay(this.#current),
 			state:this.#state,
-			items:this.#items[nowItemsIdx]
+			items:tiems
 		};
 	}
 	getID(){
@@ -112,12 +117,18 @@ export default class Project{
 			return;
 		}
 		this.#current=today;
-		if(this.getDay(today)<0){
-			this.#state=STATE_CONST.end;
+		if(this.#type==="-"&&getDaysBetween(today,this.#end)<0){
+			this.#state=STATE_CONST.finish;
 		}
 		const items=this.#items;
-		items.map((item,idx)=>{
-			item.uncheck();
+		items.map((itemGroup,groupId)=>{
+			itemGroup.map((item,idx)=>{
+				try{
+					item.uncheck();
+				}catch(e){
+					console.log(e);
+				}
+			})
 		});
 	}
 	addItem(group,itemObj){
@@ -140,7 +151,7 @@ export default class Project{
 		}
 		else{
 			let gap=getDaysBetween(this.#start,this.#current);
-			nowItemsIdx=(gap)%(this.#items.length)+1;
+			nowItemsIdx=(gap)%(this.#items.length-1)+1;
 		}
 		return nowItemsIdx;
 	}

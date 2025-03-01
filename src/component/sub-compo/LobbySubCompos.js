@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
-import { StyledLink } from '../../module/GlobalModule';
-import projectBundle from '../../module/global/DataBundle';
-import StateConst from '../../module/global/StateConst';
-import todoList from '../../module/global/ToDo';
+// import { StyledLink } from '../../module/GlobalModule';
+// import projectBundle from '../../module/global/DataBundle';
+// import StateConst from '../../module/global/StateConst';
+// import todoList from '../../module/global/ToDo';
 
 import "../../style/Template.css"
 import "../../style/ProjectCardStyle.css"
-import ProgressBar from '../ProgressBar';
+// import ProgressBar from '../ProgressBar';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { toastRef } from '../Notices';
+// import { toastRef } from '../Notices';
 import { share } from '../../module/global/ShareMethod';
-import { ProjectBundle } from '../../module/data/DataBundle';
-import { GetDateDiff } from '../../module/TimeModule';
+// import { ProjectBundle } from '../../module/data/DataBundle';
+// import { GetDateDiff } from '../../module/TimeModule';
 import ProjectModule from '../../modules/Project/Interface';
 
 // const prjDoneStamp=<span className="project_done"></span>;
@@ -132,18 +132,18 @@ function Task({task,idTree}){
 function ProjectCard({/*project,day,title,tasks*/prjID}){
 	// let {day,name,taskDone,D,state}=project
 	let id=prjID;
-	console.log("project card id: "+id);
+	// console.log("project card id: "+id);
 	let projectData=ProjectModule.GetProjectDataById(id);
-	console.log(projectData);
 	let day=projectData.day;
 	let title=projectData.title;
 	let tasks=projectData.items;
 	let type=projectData.type;
+
 	// let stat=(state===StateConst.ProjectStart?((value).toFixed(1)+"%"):"-%")
 	// let tasks=project.GetNowTasks()
 	const navigate=useNavigate();
 
-	const [refresh,pageUpdate]=useState([]);
+	// const [refresh,pageUpdate]=useState([]);
 	// console.log(tasks)
 
 	return(
@@ -181,16 +181,28 @@ function ProjectCard({/*project,day,title,tasks*/prjID}){
 			</div>
 			<div className="func_btns" style={{display:"flex",width:"100%",height:"20px"}}>
 				<div>
-					<input id={`modi${id}`} type="button" value={"수정"} onClick={
-						(event)=>{
-							/**
-							 * 프로젝트 데이터 요청?
-							 */
-						}
-					}></input>
-					<label htmlFor={`modi${id}`}>
-						<span className="base_style project_list_day ">수정</span>
-					</label>
+					{
+						tasks?(<>
+						<input id={`modi${id}`} type="button" value={"수정"} onClick={
+							(event)=>{
+								navigate(`/Modify?id=${id}`);
+							}
+						}></input>
+						<label htmlFor={`modi${id}`}>
+							<span className="base_style project_list_day ">수정</span>
+						</label>
+						</>):(<>
+						<input id={`modi${id}`} type="button" value={"삭제"} onClick={
+							(event)=>{
+								navigate(`/Delete?id=${id}`);
+							}
+						}></input>
+						<label htmlFor={`modi${id}`}>
+							<span className="base_style project_list_day ">삭제</span>
+						</label>
+						</>)
+					}
+					
 				</div>
 			</div>
 		</li>

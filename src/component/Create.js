@@ -307,8 +307,10 @@ function InspectSaveData(originData){
 // 		</div>
 // 	)
 // }
-function CreateV3({ID}){
+function CreateV3({}){
 	const today=new Date()
+	const [param,setParam]=useSearchParams();
+	let ID=param.get("id");
 	// today.setHours(0,0,0,0)
 
 	const projectDataRef=useRef(ProjectModule.GetProjectPropsById(ID)??{
@@ -328,8 +330,8 @@ function CreateV3({ID}){
 	}
 
 	
-	// const [param,setParam]=useSearchParams()
-	const [selectMode,setSelectMode]=useState(type==="+"?"start":"end");
+	
+	// const [selectMode,setSelectMode]=useState(type==="+"?"start":"end");
 
 	// const [content,setContent]=useState("")
 	// // const [type,setType]=useState(0) //0: +, 1: -
@@ -341,6 +343,10 @@ function CreateV3({ID}){
 	
 	// let {start,end}=dtData
 	console.log("start",start)
+
+	// start=today.toLocaleDateString();
+	// end=
+
 	const [re,refresh]=useState([])
 	// const [prjData,setData]=useState(projectBundle.GetProject(param.get("name"))??new Project("",CreateDataObj("",null,0,0,null)))
 	const navigate=useNavigate()
@@ -354,7 +360,7 @@ function CreateV3({ID}){
 	const CreateTaskGroup=()=>{
 		let cards=[]
 		for(let i=0;i<taskGroupCount[type];i++){
-			cards.push(<TaskCard className={"itemGroup"} name={"items"} groupId={i} key={type+i} title={`할 일 그룹 ${i+1}`}></TaskCard>)
+			cards.push(<TaskCard className={"itemGroup"} tasks={items[i+1]} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`}></TaskCard>)
 		}
 		return (cards)
 	}
@@ -364,14 +370,16 @@ function CreateV3({ID}){
 			<form className='main_platform'>
 				<div className='type_pick'>
 					<input style={{display:"none"}} id='type_plus' type='radio' name="type" value="+" defaultChecked={type==="+"} onClick={(event)=>{
-						if(ProjectModule.GetDaysBetween(start,today)<0){//start>today
-							//setDtData({...dtData,start:today})
+						if(ProjectModule.GetDaysBetween(start,today)<0){
 							projectData.start=today.toLocaleDateString();
 						}
 						projectData.type="+";
 						refresh([]);
 					}}></input>
 					<input style={{display:"none"}} id='type_min' type='radio' name="type" value="-" defaultChecked={type==="-"} onClick={()=>{
+						if(ProjectModule.GetDaysBetween(today.toDateString(),start)<0){
+							projectData.start=today.toLocaleDateString();
+						}
 						projectData.type="-";
 						refresh([]);
 					}}></input>
@@ -496,7 +504,7 @@ function CreateV3({ID}){
 						<ul style={{padding:0}}>
 							{CreateTaskGroup()}
 							{
-								type==="-"?(<TaskCard name={"lastitems"} groupId={-1} title="마지막 날 할 일 그룹"></TaskCard>):""
+								type==="-"?(<TaskCard name={"lastitems"} tasks={items[0]} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
 							}
 						</ul>
 						<div>
@@ -521,6 +529,10 @@ function CreateV3({ID}){
 						const form = document.querySelector("form.main_platform");
 						const formData = new FormData(form);
 						const data = Object.fromEntries(formData.entries());
+
+						data.end=end;
+						data.start=start;
+						console.log("data",data);
 						
 						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
 						data.items=[[]]
@@ -554,9 +566,14 @@ function CreateV3({ID}){
 
 						// data.items=items;
 						// console.log(data.items);
+						// if(id!==undefined && id!==null){
+
+						// }
+						// data.id=id;
 						ProjectModule.CreateProject(data);
-						toastRef.SetMessage("프로젝트를 생성했습니다.")
-						navigate(-1)
+
+						toastRef.SetMessage("프로젝트를 생성했습니다.");
+						navigate(-1);
 						// console.log(ProjectModule.GetAllProjectData());
 						//title 값 가져오기
 						//type 값 가져오기
@@ -610,6 +627,128 @@ function CreateV3({ID}){
 						// 		navigate(-1)
 						// 	}
 						// })
+					}}></input>
+				</label>
+				
+			</div>
+		</div>
+	)
+}
+export function Modify(){
+	const [param,setParam]=useSearchParams();
+	const navigate=useNavigate();
+	let ID=param.get("id");
+	// today.setHours(0,0,0,0)
+	if(ID===undefined || ID===null){
+		toastRef.SetMessage("잘못된 접근. id is undefined");
+		navigate(-1);
+	}
+	
+	const projectDataRef=useRef(ProjectModule.GetProjectPropsById(ID));
+	
+	const projectData=projectDataRef.current;
+	let {id,title,type,start,end,items,state}=projectData;
+	const [taskGroupCount,setTaskGroupConut]=useState(items.length)
+
+	if(type==="todo"){
+		title="오늘 할 일";
+	}
+
+	const CreateTaskGroup=()=>{
+		let cards=[];
+		for(let i=1;i<taskGroupCount;i++){
+			cards.push(<TaskCard className={"itemGroup"} tasks={items[i]} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`}></TaskCard>);
+		}
+		return (cards);
+	}
+
+	return(
+		<div className="borad">
+			<form className='main_platform'>
+				<div className='type_pick'>
+					<div className="title">
+						<TextInput disabled={true} name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
+							// projectData.current.title=event.target.value
+						}} style={{color:"black"}}></TextInput>
+					</div>
+					<div className="task_inputs">
+						<ul style={{padding:0}}>
+							{CreateTaskGroup()}
+							{
+								type==="-"?(<TaskCard name={"lastitems"} tasks={items[0]} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
+							}
+						</ul>
+						<div>
+							<input type="button" value="그룹 추가" onClick={()=>{
+								let temp=taskGroupCount+1;
+								setTaskGroupConut(temp);
+							}}></input>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div className='page_create function_btns'>
+				<label>
+					<div>뒤로가기</div>
+					<input type="button" onClick={()=>{
+						navigate(-1)
+					}}></input>
+				</label>
+				<label>
+					<div>저장</div>
+					<input type="button" onClick={()=>{
+						const form = document.querySelector("form.main_platform");
+						const formData = new FormData(form);
+						const data = Object.fromEntries(formData.entries());
+						
+						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
+						data.items=[[]]
+						for(let i=0;i<lastItems.length;i++){
+							data.items[0].push({
+								id:i,
+								content:lastItems[i].value,
+								check:false
+							});
+						}
+
+						let itemGroups=document.querySelectorAll("div.itemGroup");
+						// console.log("group length ",itemGroups.length);
+						for(let i=0;i<itemGroups.length;i++){
+							data.items.push([])
+							let items=itemGroups[i].querySelectorAll("textarea[name=items]");
+							for(let j=0;j<items.length;j++){
+								data.items[i+1].push({
+									id:j,
+									content:items[j].value,
+									check:false
+								});
+							}
+						}
+						data.id=id;
+						data.type=type;
+						data.start=start;
+						data.end=end;
+
+						ProjectModule.CreateProject(data);
+						// toastRef.SetMessage("프로젝트를 수정했습니다.");
+						navigate(-1);
+						// console.log("data",data);
+
+						// id,title,type,start,end,items
+						// if(data.type==="+"){
+						// 	data.end=null;
+						// }
+
+						// data.id=id;
+						// ProjectModule.CreateProject(data);
+
+						// if(id===undefined || id===null){
+						// 	toastRef.SetMessage("프로젝트를 생성했습니다.");
+						// }
+						// else{
+						// 	toastRef.SetMessage("프로젝트를 수정했습니다.");
+						// }
+						// navigate(-1);
 					}}></input>
 				</label>
 				
