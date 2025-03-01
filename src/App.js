@@ -3,28 +3,29 @@ import Lobby from './component/Lobby.js';
 import Project from './component/Project.js';
 import Create from './component/Create.js';
 import React, {useCallback, useEffect,useRef,useState} from "react";
+import ProjectModule from './modules/Project/Interface.js'
 
 import {InitDate} from './module/TimeModule'
-import {InitAttendance} from './module/AttendanceModule.js'
-import projectBundle from './module/global/DataBundle';
+// import {InitAttendance} from './module/AttendanceModule.js'
+// import projectBundle from './module/global/DataBundle';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import todoList from './module/global/ToDo';
+// import todoList from './module/global/ToDo';
 import ToDoToday from './component/ToDoToday';
 import ToDoModify from './component/ToDoModify';
 import InstallCompo from './component/sub-compo/InstallCompo.js';
 import { Toast } from './component/Notices.js';
-import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
-import { Authentication } from './module/global/Auth.js';
+// import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
+// import { jwtDecode } from 'jwt-decode';
+// import { Authentication } from './module/global/Auth.js';
 import { share } from './module/global/ShareMethod.js';
-import { ProjectBundle } from './module/data/DataBundle.js';
+// import { ProjectBundle } from './module/data/DataBundle.js';
 
 function App() {
 	const install=useRef()
-	const [re,setRe]=useState([])
+	const [re,refresh]=useState([])
 	const projectBundle=useRef(undefined)
 	share.app={
-		setRe,
+		refresh,
 		setProjectBundle:useCallback((bundle)=>{
 			projectBundle.current=bundle
 			share.projectLists.setRe([])
@@ -39,7 +40,11 @@ function App() {
 	}
 	useEffect(()=>{
 		// InitAttendance()
-		InitDate()
+		// InitDate()
+		ProjectModule.LoadProjects().then(()=>{
+			console.log(ProjectModule.GetAllProjectData());
+			refresh([]);
+		})
 		// todoList.Init()
 		// projectBundle.Init()
 		/**
@@ -48,12 +53,12 @@ function App() {
 		 * 서버로부터 받아올 수 있겠지만 그건 별로일 것 같고. state를 받아오는 방법으로 해보자.
 		 */
 		
-		Authentication((data)=>{
-			// let test=new ProjectBundle(data)
-			// console.log(test)
-			share.app.setProjectBundle(new ProjectBundle(data))
-			setRe([])
-		})
+		// Authentication((data)=>{
+		// 	// let test=new ProjectBundle(data)
+		// 	// console.log(test)
+		// 	share.app.setProjectBundle(new ProjectBundle(data))
+		// 	setRe([])
+		// })
 		//프로젝트 받아오기
 		//access code 저장?
 		//

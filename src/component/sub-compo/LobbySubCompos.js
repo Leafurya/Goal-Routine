@@ -12,6 +12,7 @@ import { toastRef } from '../Notices';
 import { share } from '../../module/global/ShareMethod';
 import { ProjectBundle } from '../../module/data/DataBundle';
 import { GetDateDiff } from '../../module/TimeModule';
+import ProjectModule from '../../modules/Project/Interface';
 
 // const prjDoneStamp=<span className="project_done"></span>;
 // const taskDoneStamp=<span className="done_stamp"></span>;
@@ -83,36 +84,44 @@ function GetProgressGraph(stat){
 // }
 function Task({task,idTree}){
 	// let task=project.GetNowTasks()
-	let {checked,content}=task
+	let {check,content}=task
 	return(
 		<li>
-			<label className={`${checked?" checked":""} task`}>
-				<input className='when_start' type="checkbox" defaultChecked={checked} value={content} onChange={(event)=>{
-					task.checked=(event.target.checked?1:0)
+			<label className={`${check?" checked":""} task`}>
+				<input className='when_start' type="checkbox" defaultChecked={check} value={content} onChange={(event)=>{
+					ProjectModule.CheckItem(idTree[0],idTree[1]);
+					ProjectModule.SavePorjects();
 					if(event.target.checked){
 						event.target.parentNode.classList.add("checked")
 					}
 					else{
 						event.target.parentNode.classList.remove("checked")
 					}
-					console.log(share.app.getProjectBundle())
-					console.log("idTree",idTree)
-					//서버로 로그 전송
-					fetch(`${process.env.REACT_APP_API_HOST}/api/check`,{
-						credentials:"include",
-						method:"POST",
-						headers:{
-							"Content-Type":"application/json"
-						},
-						body:JSON.stringify(["CHECK_TASK",idTree,task.checked])
-					}).then((res)=>{
-						if(res.status===200){
-							console.log("updated")
-						}
-						else{
-							console.log("update failed")
-						}
-					})
+					// task.checked=(event.target.checked?1:0)
+					// if(event.target.checked){
+					// 	event.target.parentNode.classList.add("checked")
+					// }
+					// else{
+					// 	event.target.parentNode.classList.remove("checked")
+					// }
+					// console.log(share.app.getProjectBundle())
+					// console.log("idTree",idTree)
+					// //서버로 로그 전송
+					// fetch(`${process.env.REACT_APP_API_HOST}/api/check`,{
+					// 	credentials:"include",
+					// 	method:"POST",
+					// 	headers:{
+					// 		"Content-Type":"application/json"
+					// 	},
+					// 	body:JSON.stringify(["CHECK_TASK",idTree,task.checked])
+					// }).then((res)=>{
+					// 	if(res.status===200){
+					// 		console.log("updated")
+					// 	}
+					// 	else{
+					// 		console.log("update failed")
+					// 	}
+					// })
 				}}></input>
 				<span className='check_box'></span>
 				<span>&nbsp;{`${content}`}&nbsp;</span>
@@ -120,12 +129,19 @@ function Task({task,idTree}){
 		</li>
 	)
 }
-function ProjectCard({project,day,title,tasks}){
+function ProjectCard({/*project,day,title,tasks*/prjID}){
 	// let {day,name,taskDone,D,state}=project
-	let id=project.id
+	let id=prjID;
+	console.log("project card id: "+id);
+	let projectData=ProjectModule.GetProjectDataById(id);
+	console.log(projectData);
+	let day=projectData.day;
+	let title=projectData.title;
+	let tasks=projectData.items;
+	let type=projectData.type;
 	// let stat=(state===StateConst.ProjectStart?((value).toFixed(1)+"%"):"-%")
 	// let tasks=project.GetNowTasks()
-	const navigate=useNavigate()
+	const navigate=useNavigate();
 
 	const [refresh,pageUpdate]=useState([]);
 	// console.log(tasks)
@@ -158,7 +174,7 @@ function ProjectCard({project,day,title,tasks}){
 				<ul className="task_list">
 					{
 						tasks?.map((task,index)=>{
-							return <Task key={index} task={task} idTree={[id,project.nowTaskGroup,index]}></Task>
+							return <Task key={index} task={task} idTree={[id,index]}></Task>
 						})
 					}
 				</ul>
@@ -219,7 +235,7 @@ function ProjectCard({project,day,title,tasks}){
 // 	)
 // }
 
-function ProjectLists(){
+function ProjectLists({prjIDs}){
 	/**
 	 * 투두리스트를 어떻게 저장할까?
 	 * 1. 일반 프로젝트처럼 저장한다.
@@ -237,16 +253,16 @@ function ProjectLists(){
 	share.projectLists={
 		setRe
 	}
-	const projectBundle=share.app.getProjectBundle()
+	//const projectBundle=share.app.getProjectBundle()
 	useEffect(()=>{
-		console.log("project list useeffect",projectBundle)
+		//console.log("project list useeffect",projectBundle)
 	},[re])
 	// let lists=[<ToDoCard key={Date.now()}></ToDoCard>]
 
 	// Object.values(projectBundle.data).map((project)=>{
 	// 	lists.push(<ProjectCard key={project.name} project={project}></ProjectCard>)
 	// })
-	if(projectBundle===undefined){
+	if(prjIDs===undefined){
 		return <ul className="project_list_ul">
 			loading
 		</ul>
@@ -261,13 +277,14 @@ function ProjectLists(){
 			// Object.values(projectBundle.data).map((project)=>{
 			// 	return <ProjectCard key={project.name} project={project} tasks={project.GetNowTasks()} day={project.GetDay()} title={project.name}></ProjectCard>
 			// })
-			projectBundle.data.map((project,index)=>{
-				if(index>0){
-					return <ProjectCard key={index} project={project} tasks={project.GetNowTasks()} day={project.GetDay()} title={project.name}></ProjectCard>
-				}
-				else{
-					return <ProjectCard key={index} project={project} tasks={project.GetNowTasks()} day={"오늘 할 일"} title=""></ProjectCard>
-				}
+			prjIDs.map((id,index)=>{
+				return <ProjectCard key={index} prjID={id}></ProjectCard>
+				// if(index>0){
+				// 	return <ProjectCard key={index} project={project} tasks={project.GetNowTasks()} day={project.GetDay()} title={project.name}></ProjectCard>
+				// }
+				// else{
+				// 	return <ProjectCard key={index} project={project} tasks={project.GetNowTasks()} day={"오늘 할 일"} title=""></ProjectCard>
+				// }
 			})
 		}
 	</ul>

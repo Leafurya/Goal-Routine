@@ -81,32 +81,36 @@ export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
 
 	return(
 		<table style={{fontSize:"small"}} id="calendar">
-			<tr>
-				<td className="month" colSpan={7}>
-					<input type="button" value="<" onClick={()=>{
-						date.setMonth(date.getMonth()-1)
-						setDate(new Date(date))
-					}}></input>
-					{`${year}년 ${month+1}월`}
-					<input type="button" value=">" onClick={()=>{
-						date.setMonth(date.getMonth()+1)
-						setDate(new Date(date))
-					}}></input>
-					<input type="button" value={today.getDate()} onClick={()=>{
-						setDate(new Date(today))
-					}}></input>
-				</td>
-			</tr>
-			<tr>
-				<td className="week_cell sunday">일</td>
-				<td className="week_cell">월</td>
-				<td className="week_cell">화</td>
-				<td className="week_cell">수</td>
-				<td className="week_cell">목</td>
-				<td className="week_cell">금</td>
-				<td className="week_cell saturday">토</td>
-			</tr>
-			{weeks}
+			<thead>
+				<tr>
+					<td className="month" colSpan={7}>
+						<input type="button" value="<" onClick={()=>{
+							date.setMonth(date.getMonth()-1)
+							setDate(new Date(date))
+						}}></input>
+						{`${year}년 ${month+1}월`}
+						<input type="button" value=">" onClick={()=>{
+							date.setMonth(date.getMonth()+1)
+							setDate(new Date(date))
+						}}></input>
+						<input type="button" value={today.getDate()} onClick={()=>{
+							setDate(new Date(today))
+						}}></input>
+					</td>
+				</tr>
+				<tr>
+					<td className="week_cell sunday">일</td>
+					<td className="week_cell">월</td>
+					<td className="week_cell">화</td>
+					<td className="week_cell">수</td>
+					<td className="week_cell">목</td>
+					<td className="week_cell">금</td>
+					<td className="week_cell saturday">토</td>
+				</tr>
+			</thead>
+			<tbody>
+				{weeks}
+			</tbody>
 		</table>
 	)
 }
