@@ -60,7 +60,7 @@ function UpdateProjects(){
 	if(projects.length<1){
 		return false;
 	}
-	let today=new Date("2025. 3. 5.");
+	let today=new Date();
 	let lastDate=localStorage.getItem("oldDate")??today.toLocaleDateString();
 	// console.log(lastDate);
 	today=today.toLocaleDateString();
