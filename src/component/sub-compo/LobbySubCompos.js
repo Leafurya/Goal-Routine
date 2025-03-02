@@ -149,7 +149,7 @@ function ProjectCard({/*project,day,title,tasks*/prjID}){
 	return(
 		<li style={{marginTop:"7px"}} className="card " key={id}>
 			<header style={{display:"flex",flexDirection:"column"}}>
-				<div className="title" style={{display:"flex", justifyContent:"space-between",padding:"15px 15px 5px 15px"}}>
+				<div className="title" style={{display:"flex", flexDirection:"column", justifyContent:"space-between",padding:"15px 15px 5px 15px"}}>
 					<input id={`day${id}`} type="button" onClick={
 						(event)=>{
 							
@@ -162,11 +162,13 @@ function ProjectCard({/*project,day,title,tasks*/prjID}){
 					}></input>
 
 
-					<label htmlFor={`day${id}`}>
-						<span className=" project_list_day ">{day}</span>
+					<label className=" title" htmlFor={`title${id}`} style={{display:"flex", justifyContent:"center"}}>
+						<h4 style={{textAlign:"center", margin:0}}>
+							{title}
+						</h4>
 					</label>
-					<label className=" title" htmlFor={`title${id}`}>
-						{title}
+					<label htmlFor={`day${id}`} style={{}}>
+						<span  className=" project_list_day ">{day}</span>
 					</label>
 				</div>
 			</header>

@@ -61,9 +61,10 @@ function UpdateProjects(){
 		return false;
 	}
 	let today=new Date();
-	let lastDate=localStorage.getItem("oldDate")??today.toLocaleDateString();
-	// console.log(lastDate);
 	today=today.toLocaleDateString();
+	let lastDate=localStorage.getItem("oldDate")??today;
+	// console.log(lastDate);
+	
 	if(getDaysBetween(lastDate,today)==0){
 		return true;
 	}
@@ -73,7 +74,7 @@ function UpdateProjects(){
 		project.update(today);
 	});
 	lastDate=today;
-
+	localStorage.setItem("oldDate",lastDate);
 	return true;
 }
 async function LoadProjects(){
@@ -95,7 +96,7 @@ async function LoadProjects(){
 		CreateProject(project);
 	});
 
-	localStorage.setItem("oldDate",today);
+	// localStorage.setItem("oldDate",today);
 	// console.log("create project");
 }
 async function SavePorjects(){
