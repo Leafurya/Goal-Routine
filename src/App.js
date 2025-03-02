@@ -1,3 +1,4 @@
+import "./fonts/pretendard.css"
 import './App.css';
 import Lobby from './component/Lobby.js';
 import Project from './component/Project.js';

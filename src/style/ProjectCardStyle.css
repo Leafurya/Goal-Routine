@@ -15,7 +15,7 @@
 	background-color: rgb(255, 255, 255);
 	/* background-color: #947fda; */
 	box-sizing: border-box;
-	padding:5px 5px 0 5px;
+	padding:0 5px 0 5px;
 }
 /* .project_list_li{
 	width: 100%;
@@ -79,7 +79,7 @@
 	color: black;
 } */
 ul.task_list{
-	padding: 10px 10px 0 10px;
+	padding: 0 10px 0 10px;
 	margin:0;
 }
 ul.task_list .task{

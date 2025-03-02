@@ -5,7 +5,9 @@ body{
 	width: 100%;
 	font-size: x-large;
 	overflow:hidden;
-	font-family: 'Jeju Gothic', sans-serif;
+	/* font-family: 'Jeju Gothic', sans-serif; */
+	font-family: "Pretendard";
+	font-weight: 700;
 	
 	
 	-webkit-user-select: none !important; 
@@ -26,5 +28,8 @@ li{
 	/* background-color: #7965bd; */
 }
 textarea,input{
-	font-family: 'Jeju Gothic', sans-serif;
+	/* font-family: 'Jeju Gothic', sans-serif; */
+	font-family: "Pretendard";
+	font-weight: 600;
+	/* height: 1.5em; */
 }
