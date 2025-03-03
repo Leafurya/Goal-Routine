@@ -498,7 +498,7 @@ function CreateV3({}){
 					<div className="title">
 						<TextInput name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
 							// projectData.current.title=event.target.value
-						}} style={{color:"black"}}></TextInput>
+						}} style={{color:"black",width:"100%",boxSizing:"border-box",textAlign:"center"}}></TextInput>
 					</div>
 					<div className="task_inputs">
 						<ul style={{padding:0}}>
