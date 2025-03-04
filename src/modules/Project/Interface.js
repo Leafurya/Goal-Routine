@@ -49,6 +49,7 @@ function CreateProject(formData){
 	items.map((itemGroup,groupIdx)=>{
 		project.createItemGroup(groupIdx);
 		itemGroup.map((item,itemIdx)=>{
+			item.id=itemIdx;
 			project.addItem(groupIdx,item);
 		})
 	})

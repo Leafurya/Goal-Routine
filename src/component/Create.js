@@ -532,13 +532,13 @@ function CreateV3({}){
 
 						data.end=end;
 						data.start=start;
-						console.log("data",data);
+						// console.log("data",data);
 						
 						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
 						data.items=[[]]
 						for(let i=0;i<lastItems.length;i++){
 							data.items[0].push({
-								id:i,
+								// id:i,
 								content:lastItems[i].value,
 								check:false
 							});
@@ -546,13 +546,13 @@ function CreateV3({}){
 
 						// data.items=[lastItems??[]];
 						let itemGroups=document.querySelectorAll("div.itemGroup");
-						console.log("group length ",itemGroups.length);
+						// console.log("group length ",itemGroups.length);
 						for(let i=0;i<itemGroups.length;i++){
 							data.items.push([])
 							let items=itemGroups[i].querySelectorAll("textarea[name=items]");
 							for(let j=0;j<items.length;j++){
 								data.items[i+1].push({
-									id:j,
+									// id:j,
 									content:items[j].value,
 									check:false
 								});
@@ -574,6 +574,7 @@ function CreateV3({}){
 
 						toastRef.SetMessage("프로젝트를 생성했습니다.");
 						navigate(-1);
+
 						// console.log(ProjectModule.GetAllProjectData());
 						//title 값 가져오기
 						//type 값 가져오기
@@ -649,6 +650,7 @@ export function Modify(){
 	const projectData=projectDataRef.current;
 	let {id,title,type,start,end,items,state}=projectData;
 	const [taskGroupCount,setTaskGroupConut]=useState(items.length)
+	console.log("modi items",items);
 
 	if(type==="todo"){
 		title="오늘 할 일";
@@ -705,9 +707,9 @@ export function Modify(){
 						data.items=[[]]
 						for(let i=0;i<lastItems.length;i++){
 							data.items[0].push({
-								id:i,
+								// id:i,
 								content:lastItems[i].value,
-								check:false
+								check:items[0][i].check??false
 							});
 						}
 
@@ -715,12 +717,12 @@ export function Modify(){
 						// console.log("group length ",itemGroups.length);
 						for(let i=0;i<itemGroups.length;i++){
 							data.items.push([])
-							let items=itemGroups[i].querySelectorAll("textarea[name=items]");
-							for(let j=0;j<items.length;j++){
+							let _items=itemGroups[i].querySelectorAll("textarea[name=items]");
+							for(let j=0;j<_items.length;j++){
 								data.items[i+1].push({
-									id:j,
-									content:items[j].value,
-									check:false
+									// id:j,
+									content:_items[j].value,
+									check:items[i+1][j]?.check??false
 								});
 							}
 						}
@@ -728,6 +730,8 @@ export function Modify(){
 						data.type=type;
 						data.start=start;
 						data.end=end;
+
+						console.log("modi",data);
 
 						ProjectModule.CreateProject(data);
 						// toastRef.SetMessage("프로젝트를 수정했습니다.");
