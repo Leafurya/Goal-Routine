@@ -35,7 +35,7 @@ function Lobby(){
 	if(ProjectModule.UpdateProjects()){
 		projectIDs=ProjectModule.GetIDs();
 		ProjectModule.SavePorjects();
-		console.log(projectIDs)
+		// console.log(projectIDs)
 	}
 	useEffect(()=>{
 	},[])

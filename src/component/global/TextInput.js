@@ -2,6 +2,7 @@ import React from "react";
 import { TextAreaKeyInput } from "../../module/CreateCompModule";
 
 export default ({style,placeholder,className,data,name,value,disabled,id,onChange})=>{
+	console.log("value",value);
 	return(
 		<textarea style={{
 			border:"none",

@@ -132,9 +132,12 @@ export default class Project{
 		});
 	}
 	addItem(group,itemObj){
-		let item=new Item(this.#nofItems,itemObj);
-		this.#items[group].push(item);
-		this.#nofItems=this.#items.length;
+		console.log(group,itemObj);
+		if(itemObj){
+			let item=new Item(this.#nofItems,itemObj);
+			this.#items[group].push(item);
+			this.#nofItems=this.#items.length;
+		}
 	}
 	createItemGroup(groupIdx){
 		this.#items[groupIdx]=[]
