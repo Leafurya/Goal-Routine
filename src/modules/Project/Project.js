@@ -134,7 +134,7 @@ export default class Project{
 	addItem(group,itemObj){
 		console.log(group,itemObj);
 		if(itemObj){
-			let item=new Item(this.#nofItems,itemObj);
+			let item=new Item(itemObj.id,itemObj);
 			this.#items[group].push(item);
 			this.#nofItems=this.#items.length;
 		}

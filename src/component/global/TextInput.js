@@ -1,8 +1,18 @@
 import React from "react";
-import { TextAreaKeyInput } from "../../module/CreateCompModule";
+
+function TextAreaKeyInput(e){
+	if(e.keyCode===13){
+		// let textInput=e.target
+		// let name=e.target.dataset.name
+		// GetElement(`${name}s`).appendChild(CreateTaskInputCell(name,textInput.value).div);
+		// // GetElement(`${name}s`).appendChild(<TaskInputCell name={name} cntnt={textInput.value} disabled={false}></TaskInputCell>);
+		// textInput.value=""
+		// textInput.focus()
+		e.preventDefault()
+	}
+}
 
 export default ({style,placeholder,className,data,name,value,disabled,id,onChange})=>{
-	console.log("value",value);
 	return(
 		<textarea style={{
 			border:"none",
