@@ -7,8 +7,6 @@ import "../../style/CalendarStyle.css"
  */
 
 export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
-	// document.querySelector(".month").innerHTML=month+1+"월"
-
 	let today=new Date()
 	today.setHours(0,0,0,0)
 	start.setHours(0,0,0,0)
@@ -16,10 +14,6 @@ export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
 		end.setHours(0,0,0,0)
 	}
 	const [date,setDate]=useState(new Date(today))
-	
-	// const [selected,setSelected]=useState(new Date(select))
-
-
 	
 	let dayEle=new Array(42)
 	date.setDate(1)
@@ -47,9 +41,6 @@ export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
 				className+=" saturday"
 			}
 			
-			// if(dayEle[index]?.getTime()===select.getTime()){
-				// 	className+=" selected"
-				// }
 			if(dayEle[index]?.getTime()>=start.getTime()&&
 			dayEle[index]?.getTime()<=((end?.getTime())??start.getTime())){
 				className+=" selected"
@@ -62,12 +53,9 @@ export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
 				<td key={dayIndex} style={{textAlign:textAlign??"center"}} className={className} onClick={((date)=>{
 					return(()=>{
 						onChange(date)
-						// setSelected(date)
 					})
 				})(dayEle[index])}>
-					{/* <div style={{}}> */}
-						{React.cloneElement(children,{date:dayEle[index++]?.getDate()})}
-					{/* </div> */}
+					{React.cloneElement(children,{date:dayEle[index++]?.getDate()})}
 				</td>
 			)
 		}

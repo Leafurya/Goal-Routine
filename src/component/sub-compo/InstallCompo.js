@@ -2,7 +2,7 @@ import React, { useCallback, useRef } from "react";
 
 function Title(){
 	return(
-		<div style={{display:"flex",width:"100%",height:70}}>{/*title*/}
+		<div style={{display:"flex",width:"100%",height:70}}>
 			<div style={{backgroundImage:"url(./applogo192prev.png)",backgroundPosition:"center",backgroundSize:"contain",backgroundRepeat:"no-repeat", flex:1}}></div>
 			<div style={{flex:3}}>
 				<h1 style={{margin:0,color:"white",fontSize:"x-large",transform:"translateY(-50%)",top:"50%",position:"relative"}}>목표와 반복</h1>
@@ -52,7 +52,6 @@ function SimpleDescription(){
 	)
 }
 function InstallButton({value,onClick}){
-	
 	/**
 	 * 안드로이드: 스토어 바로가기, 설치하기 버튼
 	 * pc: 스토어 qr(안드로이드), 사이트 qr(ios)

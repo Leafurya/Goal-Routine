@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import "../style/Notice.css"
+import React, { useRef, useState } from "react";
 
 function NotiBase({children,btns}){
 	return(
@@ -7,8 +8,6 @@ function NotiBase({children,btns}){
 				<div style={{padding:"15px 10px 5px 10px",fontSize:"large",color:"white",textAlign:"center"}}>
 					{children}
 				</div>
-				{/* <div  style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
-				</div> */}
 				<div style={{display:"flex",bottom:0,margin:0,height:"35px"}}>
 					{
 						btns.map((btn,index)=>{
@@ -50,13 +49,6 @@ function Confrim({children,ResultCallback}){
 		</NotiBase>
 	)
 }
-function TextAreaKeyInput(e){
-	console.log(e)
-	if(e.keyCode===13){
-		e.preventDefault()
-
-	}
-}
 function Prompt({children,ResultCallback}){
 	return(
 		<NotiBase btns={[{
@@ -92,7 +84,7 @@ function Toast({}){
 		timeout:null,
 		msg:[]
 	})
-	// console.group("toast")
+	
 	toastRef.SetMessage=(msg)=>{
 
 		if(ref.current.timeout!==null){
@@ -100,15 +92,13 @@ function Toast({}){
 			ref.current.timeout=null
 		}
 		ref.current.timeout=setTimeout(() => {
-			// ref.current.msg.shift()
 			ref.current.msg=[]
 			setMessage([])
-			// console.log("timeout end")
 		}, 2500);
 		ref.current.msg.push(<div key={ref.current.msg.length} className="uniqe_toast">{msg}</div>)
 		setMessage([])
 	}
-	// console.groupEnd("toast")
+	
 	return(
 		<div style={{bottom:150,position:"absolute",left:0,width:"100%"}}>
 			{ref.current.msg}

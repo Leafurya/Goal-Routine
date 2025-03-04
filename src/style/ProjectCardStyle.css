@@ -100,3 +100,7 @@ ul.task_list .check_box{
 .checked>.check_box{
 	background-color: #af7eebaf;
 }
+.checked{
+	text-decoration: line-through;
+	text-decoration-color: black;
+}
