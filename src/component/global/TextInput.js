@@ -21,6 +21,7 @@ export default ({style,placeholder,className,data,name,value,disabled,id,onChang
 			color:"white",
 			padding:"5px 20px",
 			margin:"0",
+			resize: "none",
 			...style
 		}} onChange={onChange} className={className} placeholder={placeholder} rows="1" onKeyDown={TextAreaKeyInput} wrap="off" data-name={data} name={name} defaultValue={value} disabled={disabled} id={id}></textarea>
 	)
