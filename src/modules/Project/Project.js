@@ -149,7 +149,7 @@ export default class Project{
 	}
 	getNowItemsIdx(){
 		let nowItemsIdx;
-		if(this.#end!==null&&getDaysBetween(this.#current,this.#end)===0){
+		if(this.#end!==null&&getDaysBetween(this.#current,this.#end)===0&&this.#items[0].length){
 			nowItemsIdx=0;
 		}
 		else{
