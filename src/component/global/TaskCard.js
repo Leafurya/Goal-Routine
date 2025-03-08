@@ -22,7 +22,7 @@ export default ({title,groupId,tasks,name,className})=>{
 	
 	useEffect(()=>{
 		document.querySelector(`#group_${groupId} ul.task_list`)?.childNodes[taskList.length]?.querySelector("textarea").focus()
-		console.log(taskList)
+		tasks=taskList;
 	},[taskList])
 
 	return(

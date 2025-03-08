@@ -320,32 +320,43 @@ export function Modify(){
 						const form = document.querySelector("form.main_platform");
 						const formData = new FormData(form);
 						const data = Object.fromEntries(formData.entries());
-						
+
 						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
 						data.items=[[]]
-						for(let i=0;i<lastItems.length;i++){
+
+						let nowItemGroup=items[0];
+						nowItemGroup=nowItemGroup.filter(Boolean);
+						nowItemGroup.map((item,idx)=>{
+							let check;
+							try{
+								check=item?.check??false;
+							}catch(e){
+								check=false;
+							}
 							data.items[0].push({
-								content:lastItems[i].value,
-								check:items[0][i].check??false
+								content:lastItems[idx].value,
+								check:check
 							});
-						}
+						});
 
 						let itemGroups=document.querySelectorAll("div.itemGroup");
 						for(let i=0;i<itemGroups.length;i++){
 							data.items.push([])
 							let _items=itemGroups[i].querySelectorAll("textarea[name=items]");
-							for(let j=0;j<_items.length;j++){
+							nowItemGroup=items[i+1];
+							nowItemGroup=nowItemGroup.filter(Boolean);
+							nowItemGroup.map((item,idx)=>{
 								let check;
 								try{
-									check=items[i+1][j]?.check??false;
+									check=item?.check??false;
 								}catch(e){
 									check=false;
 								}
 								data.items[i+1].push({
-									content:_items[j].value,
+									content:_items[idx].value,
 									check:check
 								});
-							}
+							});
 						}
 						data.id=id;
 						data.type=type;
