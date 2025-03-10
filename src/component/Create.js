@@ -362,6 +362,7 @@ export function Modify(){
 						data.type=type;
 						data.start=start;
 						data.end=end;
+						data.title=title;
 
 						ProjectModule.CreateProject(data);
 						navigate(-1);
