@@ -44,7 +44,7 @@ function CreateV3({}){
 		//할 일 그룹들 생성성
 		let cards=[]
 		for(let i=0;i<taskGroupCount[type];i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items[i+1]} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`}></TaskCard>)
+			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`}></TaskCard>)
 		}
 		return (cards)
 	}
@@ -184,7 +184,7 @@ function CreateV3({}){
 						<ul style={{padding:0}}>
 							{CreateTaskGroup()}
 							{
-								type==="-"?(<TaskCard name={"lastitems"} tasks={items[0]} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
+								type==="-"?(<TaskCard name={"lastitems"} tasks={items} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
 							}
 						</ul>
 						<div>
@@ -278,7 +278,7 @@ export function Modify(){
 	const CreateTaskGroup=()=>{
 		let cards=[];
 		for(let i=1;i<taskGroupCount;i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items[i]} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`}></TaskCard>);
+			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`}></TaskCard>);
 		}
 		return (cards);
 	}
@@ -295,7 +295,7 @@ export function Modify(){
 						<ul style={{padding:0}}>
 							{CreateTaskGroup()}
 							{
-								type==="-"?(<TaskCard name={"lastitems"} tasks={items[0]} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
+								type==="-"?(<TaskCard name={"lastitems"} tasks={items} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
 							}
 						</ul>
 						<div>
