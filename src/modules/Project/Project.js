@@ -58,6 +58,9 @@ export default class Project{
 	setEnd(end){
 		this.#end=end;
 	}
+	setID(id){
+		this.#id=id;
+	}
 	getDay(today){
 		switch(this.#type){
 			case "todo":

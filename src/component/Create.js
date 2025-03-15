@@ -270,9 +270,11 @@ export function Modify(){
 	const projectData=projectDataRef.current;
 	let {id,title,type,start,end,items,state}=projectData;
 	const [taskGroupCount,setTaskGroupConut]=useState(items.length);
+	let disabled=false;
 
 	if(type==="todo"){
 		title="오늘 할 일";
+		disabled=true;
 	}
 
 	const CreateTaskGroup=()=>{
@@ -288,7 +290,8 @@ export function Modify(){
 			<form className='main_platform'>
 				<div className='type_pick'>
 					<div className="title">
-						<TextInput disabled={true} name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
+						<TextInput disabled={disabled} name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
+							title=event.target.value
 						}} style={{color:"black",width:"100%",boxSizing:"border-box",textAlign:"center"}}></TextInput>
 					</div>
 					<div className="task_inputs">
@@ -299,10 +302,20 @@ export function Modify(){
 							}
 						</ul>
 						<div>
-							<input type="button" value="그룹 추가" onClick={()=>{
-								let temp=taskGroupCount+1;
-								setTaskGroupConut(temp);
-							}}></input>
+							{
+								type==="todo"?(""):(
+								<>
+									<input type="button" value="그룹 추가" onClick={()=>{
+										let temp=taskGroupCount+1;
+										setTaskGroupConut(temp);
+									}}></input>
+									<input type="button" value="삭제" onClick={()=>{
+										ProjectModule.RemoveProject(id);
+										navigate(-1);
+									}}></input>
+								</>)
+							}
+							
 						</div>
 					</div>
 				</div>
@@ -362,7 +375,12 @@ export function Modify(){
 						data.type=type;
 						data.start=start;
 						data.end=end;
-						data.title=title;
+						if(type==="todo"){
+							data.title=null;
+						}
+						else{
+							data.title=title;
+						}
 
 						ProjectModule.CreateProject(data);
 						navigate(-1);

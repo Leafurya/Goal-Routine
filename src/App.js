@@ -11,18 +11,6 @@ import { Delete } from './component/Delete.js';
 import { Toast } from './component/Notices.js';
 
 import ProjectModule from './modules/Project/Interface.js'
-// import Project from './component/Project.js';
-// import {InitDate} from './module/TimeModule'
-// import {InitAttendance} from './module/AttendanceModule.js'
-// import projectBundle from './module/global/DataBundle';
-// import todoList from './module/global/ToDo';
-// import ToDoToday from './component/ToDoToday';
-// import ToDoModify from './component/ToDoModify';
-// import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
-// import { jwtDecode } from 'jwt-decode';
-// import { Authentication } from './module/global/Auth.js';
-//import { share } from './module/global/ShareMethod.js'; //??
-// import { ProjectBundle } from './module/data/DataBundle.js';
 
 function App() {
 	const [re,refresh]=useState([])

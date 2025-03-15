@@ -82,6 +82,7 @@ function GetProjectDataById(id){
 	return data;
 }
 function RemoveProject(id){
+	id=parseInt(id);
 	projects[id].cleanup();
 	projects[id]=null;
 	projects.splice(id,1);
@@ -104,6 +105,18 @@ function GetProjectPropsById(id){
 function CheckItem(prjID,itemID){
 	projects[prjID].check(itemID);
 }
+function ToFront(prjID){
+	let target=projects[prjID];
+
+	for(;prjID>1;prjID--){
+		projects[prjID]=projects[prjID-1]
+		projects[prjID].setID(prjID);
+	}
+	projects[1]=target;
+	projects[1].setID(1);
+
+	console.log("tofront",projects);
+}
 
 const ProjectModule={
 	CreateProject,
@@ -116,7 +129,8 @@ const ProjectModule={
 	GetProjectDataById,
 	GetDaysBetween,
 	GetProjectPropsById,
-	CheckItem
+	CheckItem,
+	ToFront
 };
 
 export default ProjectModule;
