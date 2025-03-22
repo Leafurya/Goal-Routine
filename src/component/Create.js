@@ -259,18 +259,21 @@ export function Modify(){
 	const navigate=useNavigate();
 	let ID=param.get("id");
 	
+	
+	
+	const projectDataRef=useRef(ProjectModule.GetProjectPropsById(ID));
+	
+	const projectData={...projectDataRef.current};
+	let {id,title,type,start,end,items,state}=projectData;
+	const [taskGroupCount,setTaskGroupConut]=useState(items.length);
+	let disabled=false;
+
 	if(ID===undefined || ID===null){
 		//id없이 컴포넌트를 열면
 		toastRef.SetMessage("잘못된 접근. id is undefined");
 		navigate(-1);
+		return "";
 	}
-	
-	const projectDataRef=useRef(ProjectModule.GetProjectPropsById(ID));
-	
-	const projectData=projectDataRef.current;
-	let {id,title,type,start,end,items,state}=projectData;
-	const [taskGroupCount,setTaskGroupConut]=useState(items.length);
-	let disabled=false;
 
 	if(type==="todo"){
 		title="오늘 할 일";
