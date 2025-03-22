@@ -100,7 +100,7 @@ function GetProjectPropsById(id){
 	}catch(e){
 		return null;
 	}
-	return data;
+	return {...data};
 }
 function CheckItem(prjID,itemID){
 	projects[prjID].check(itemID);

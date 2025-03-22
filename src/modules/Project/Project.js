@@ -90,7 +90,7 @@ export default class Project{
 			type:this.#type,
 			start:this.#start,
 			end:this.#end,
-			items:this.#items
+			items:[...this.#items]
 		}
 	}
 	getData(){

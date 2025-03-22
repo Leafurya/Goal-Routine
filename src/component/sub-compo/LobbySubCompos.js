@@ -22,7 +22,7 @@ function Task({task,idTree}){
 					}
 				}}></input>
 				<span className='check_box'></span>
-				<span>&nbsp;{`${content}`}&nbsp;</span>
+				<span style={{width:"90%"}}>&nbsp;{`${content}`}&nbsp;</span>
 			</label>
 		</li>
 	)
