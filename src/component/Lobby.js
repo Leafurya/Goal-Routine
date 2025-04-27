@@ -11,14 +11,23 @@ function Lobby(){
 	const navigate=useNavigate()
 	let projectIDs;
 
-	if(ProjectModule.UpdateProjects()){
-		projectIDs=ProjectModule.GetIDs();
-		ProjectModule.SavePorjects();
+	try{
+		if(ProjectModule.UpdateProjects()){
+			projectIDs=ProjectModule.GetIDs();
+			ProjectModule.SavePorjects();
+		}
+	}catch(e){
+		return e
 	}
-	useEffect(()=>{
-	},[])
+	// let result=ProjectModule.UpdateProjects();
+	// if(result>=0){
+	// 	projectIDs=ProjectModule.GetIDs();
+	// }
+	// if(result===1){
+	// 	ProjectModule.SavePorjects();
+	// }
 
-	return(
+	return (
 		<div className="borad">
 			<ProjectLists prjIDs={projectIDs}></ProjectLists>
 			<div style={{padding:"15px"}}>
@@ -30,7 +39,7 @@ function Lobby(){
 					</label>
 			</div>
 		</div>
-	)
+	);
 }
 export default Lobby;
 
