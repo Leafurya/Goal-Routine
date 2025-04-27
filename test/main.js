@@ -1,10 +1,11 @@
-class obj{
-	constructor(b){
-		this.a=b
-	}
+function test(){
+	a=null
+	console.log(a.ab)
 }
 
-let a=new obj(2)
-console.log(a)
-
-console.log(new obj(null,a))
+try{
+	test()
+}catch(e){
+	console.log("error")
+	console.log(e)
+}

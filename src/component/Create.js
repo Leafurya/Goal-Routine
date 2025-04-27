@@ -263,7 +263,7 @@ export function Modify(){
 	
 	const projectDataRef=useRef(ProjectModule.GetProjectPropsById(ID));
 	
-	const projectData={...projectDataRef.current};
+	const projectData=projectDataRef.current;
 	let {id,title,type,start,end,items,state}=projectData;
 	const [taskGroupCount,setTaskGroupConut]=useState(items.length);
 	let disabled=false;
@@ -324,12 +324,12 @@ export function Modify(){
 				</div>
 			</form>
 			<div className='page_create function_btns'>
-				<label>
+				{/* <label>
 					<div>뒤로가기</div>
 					<input type="button" onClick={()=>{
 						navigate(-1)
 					}}></input>
-				</label>
+				</label> */}
 				<label>
 					<div>저장</div>
 					<input type="button" onClick={()=>{

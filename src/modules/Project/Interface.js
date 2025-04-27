@@ -6,13 +6,13 @@ const projects=[];
 function CreateProject(formData){
 	let {id,title,start,end,type,state,items}=formData;
 	let today=new Date();
-	console.log("create id",id);
+	// console.log("create id",id);
 	id=(id??projects.length);
 	let project=new Project(id,title,start,end,type,today.toLocaleDateString(),state??STATE_CONST.start);
 	items.map((itemGroup,groupIdx)=>{
 		project.createItemGroup(groupIdx);
 		itemGroup.map((item,itemIdx)=>{
-			console.log("g",groupIdx,", i",itemIdx);
+			// console.log("g",groupIdx,", i",itemIdx);
 			item.id=itemIdx;
 			project.addItem(groupIdx,item);
 		})
@@ -28,6 +28,7 @@ function UpdateProjects(){
 	today=today.toLocaleDateString();
 	let lastDate=localStorage.getItem("oldDate")??today;
 	
+	console.log("getDaysBetween(lastDate,today)",getDaysBetween(lastDate,today));
 	if(getDaysBetween(lastDate,today)==0){
 		return true;
 	}
@@ -42,18 +43,29 @@ function UpdateProjects(){
 async function LoadProjects(){
 	let today=new Date();
 	today=today.toLocaleDateString();
-	let projectData = JSON.parse(localStorage.getItem("project")??`
-	[
-		{
-			"id":0,
-			"title":"",
-			"type":"todo",
-			"start":"${today}",
-			"end":null,
-			"items":[[],[]]
-		}
-	]
-	`);
+	let projectData;
+	projectData = JSON.parse(localStorage.getItem("project"));
+
+	if(projectData===null){
+		localStorage.setItem("project",localStorage.getItem("backup")??`
+		[
+			{
+				"id":0,
+				"title":"",
+				"type":"todo",
+				"start":"${today}",
+				"end":null,
+				"items":[[],[]]
+			}
+		]
+		`);
+		projectData = JSON.parse(localStorage.getItem("project"));
+	}
+	else{
+		localStorage.setItem("backup",JSON.stringify(projectData));
+	}
+
+	
 	projectData.map((project,idx)=>{
 		CreateProject(project);
 	});

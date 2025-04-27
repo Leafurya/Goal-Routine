@@ -15,11 +15,19 @@ import ProjectModule from './modules/Project/Interface.js'
 function App() {
 	const [re,refresh]=useState([])
 	useEffect(()=>{
-		ProjectModule.LoadProjects().then(()=>{
-			console.log(ProjectModule.GetAllProjectData());
-			refresh([]);
-		})
+		try{
+			ProjectModule.LoadProjects().then(()=>{
+				// console.log("ProjectModule.GetAllProjectData()",ProjectModule.GetAllProjectData());
+				refresh([]);
+			})
+		}catch(e){
+			refresh(e)
+		}
 	},[])
+
+	if(typeof(re)==="string"){
+		return re
+	}
 	
 	if(process.env.NODE_ENV!=="development"){
 		if(!window.matchMedia("(display-mode: standalone)").matches){
