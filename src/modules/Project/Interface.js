@@ -17,7 +17,9 @@ function CreateProject(formData){
 			project.addItem(groupIdx,item);
 		})
 	})
-	projects[id]=project;
+	projects.push(project)
+	project.setID(projects.length-1)
+	// projects[id]=project;
 	return id;
 }
 function UpdateProjects(){
@@ -45,7 +47,7 @@ async function LoadProjects(){
 	today=today.toLocaleDateString();
 	let projectData;
 	projectData = JSON.parse(localStorage.getItem("project"));
-
+	
 	if(projectData===null){
 		localStorage.setItem("project",localStorage.getItem("backup")??`
 		[
@@ -64,7 +66,6 @@ async function LoadProjects(){
 	else{
 		localStorage.setItem("backup",JSON.stringify(projectData));
 	}
-
 	
 	projectData.map((project,idx)=>{
 		CreateProject(project);
