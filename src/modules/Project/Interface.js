@@ -68,7 +68,9 @@ async function LoadProjects(){
 	}
 	
 	projectData.map((project,idx)=>{
-		CreateProject(project);
+		if(project!==null){
+			CreateProject(project);
+		}
 	});
 }
 async function SavePorjects(){
