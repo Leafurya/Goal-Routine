@@ -17,16 +17,16 @@ function CreateProject(formData){
 			project.addItem(groupIdx,item);
 		})
 	})
-	projects.push(project)
-	project.setID(projects.length-1)
-	// projects[id]=project;
+	// projects.push(project)
+	// project.setID(projects.length-1)
+	projects[id]=project;
 	return id;
 }
 function UpdateProjects(){
 	if(projects.length<1){
 		return false;
 	}
-	let today=new Date();
+	let today=new Date("2025-5-7");
 	today=today.toLocaleDateString();
 	let lastDate=localStorage.getItem("oldDate")??today;
 	
@@ -101,6 +101,10 @@ function RemoveProject(id){
 	projects[id].cleanup();
 	projects[id]=null;
 	projects.splice(id,1);
+
+	projects.map((project,idx)=>{
+		project.setID(idx);
+	})
 }
 function GetIDs(){
 	return Object.keys(projects);
