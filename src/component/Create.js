@@ -341,18 +341,20 @@ export function Modify(){
 						data.items=[[]]
 
 						let nowItemGroup=items[0];
-						nowItemGroup=nowItemGroup.filter(Boolean);
+						nowItemGroup=nowItemGroup.filter(Boolean); //undefined 등 비정상 값을 필터링 
 						nowItemGroup.map((item,idx)=>{
-							let check;
-							try{
-								check=item?.check??false;
-							}catch(e){
-								check=false;
+							if(lastItems[idx].value!==""){
+								let check;
+								try{
+									check=item?.check??false;
+								}catch(e){
+									check=false;
+								}
+								data.items[0].push({
+									content:lastItems[idx].value,
+									check:check
+								});
 							}
-							data.items[0].push({
-								content:lastItems[idx].value,
-								check:check
-							});
 						});
 
 						let itemGroups=document.querySelectorAll("div.itemGroup");
@@ -362,16 +364,18 @@ export function Modify(){
 							nowItemGroup=items[i+1];
 							nowItemGroup=nowItemGroup.filter(Boolean);
 							nowItemGroup.map((item,idx)=>{
-								let check;
-								try{
-									check=item?.check??false;
-								}catch(e){
-									check=false;
+								if(_items[idx].value!==""){
+									let check;
+									try{
+										check=item?.check??false;
+									}catch(e){
+										check=false;
+									}
+									data.items[i+1].push({
+										content:_items[idx].value,
+										check:check
+									});
 								}
-								data.items[i+1].push({
-									content:_items[idx].value,
-									check:check
-								});
 							});
 						}
 						data.id=id;

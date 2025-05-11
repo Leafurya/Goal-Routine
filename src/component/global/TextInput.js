@@ -14,7 +14,7 @@ function TextAreaKeyInput(e){
 
 export default ({style,placeholder,className,data,name,value,disabled,id,onChange})=>{
 	return(
-		<textarea style={{
+		<textarea key={Date.now()} style={{
 			border:"none",
 			fontSize:"x-large",
 			background:'none',
@@ -23,6 +23,9 @@ export default ({style,placeholder,className,data,name,value,disabled,id,onChang
 			margin:"0",
 			resize: "none",
 			...style
-		}} onChange={onChange} className={className} placeholder={placeholder} rows="1" onKeyDown={TextAreaKeyInput} wrap="off" data-name={data} name={name} defaultValue={value} disabled={disabled} id={id}></textarea>
+		}} onChange={onChange} className={className} placeholder={placeholder} rows="1" onKeyDown={TextAreaKeyInput} wrap="off" data-name={data} name={name} defaultValue={value} disabled={disabled} id={id} onFocus={(e)=>{
+			console.log(e.target.id)
+			e.target.focus()
+		}}></textarea>
 	)
 }
