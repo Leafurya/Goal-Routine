@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "./TextInput";
 
-function TaskInput({content,onDelete,onChange,name}){
+function TaskInput({id,content,onDelete,onChange,name}){
 	
 	return(
 		<li>
 			<div className={"task"}>
 				<span className="check_box"></span>
-				<TextInput style={{color:"black",fontSize:"medium"}} name={name} value={content} onChange={onChange}></TextInput>
+				<TextInput id={id} style={{color:"black",fontSize:"medium"}} name={name} value={content} onChange={onChange}></TextInput>
 				<label>
 					-
 					<input type="button" onClick={onDelete}></input>
@@ -21,7 +21,8 @@ export default ({title,groupId,tasks,name,className})=>{
 	const[taskList,setTaskList]=useState(tasks[groupId]??[])
 	
 	useEffect(()=>{
-		document.querySelector(`#group_${groupId} ul.task_list`)?.childNodes[taskList.length]?.querySelector("textarea").focus()
+		console.log("taskList.length",taskList.length)
+		// document.querySelector(`#group_${groupId} ul.task_list`)?.childNodes[taskList.length-1]?.querySelector("textarea").focus()
 		tasks[groupId]=taskList;
 	},[taskList])
 
@@ -36,16 +37,18 @@ export default ({title,groupId,tasks,name,className})=>{
 				{
 					taskList.map((task,index)=>{
 						if(task){
-							return <TaskInput name={name} key={index} content={task.content} onChange={((index,taskList)=>{
+							return <TaskInput id={index} name={name} key={index} content={task.content} onChange={((index,taskList)=>{
 								return (event)=>{
 									taskList[index].content=event.target.value
 								}
-							})(index,taskList)} onDelete={((index)=>{
-								return ()=>{
-									delete taskList[index];
-									setTaskList([...taskList])
-								}
-							})(index)}></TaskInput>
+								})(index,taskList)} onDelete={((index)=>{
+									return ()=>{
+										delete taskList[index];
+										taskList.splice(index,1);
+										console.log(taskList)
+										setTaskList([...taskList])
+									}
+								})(index)}></TaskInput>
 						}
 					})
 				}
@@ -57,8 +60,11 @@ export default ({title,groupId,tasks,name,className})=>{
 						<span className="base_style project_list_day">+</span>
 						<input type="button" value={"+"} onClick={
 							(event)=>{
-								taskList.push({check:false,content:"",id:taskList.length});
-								setTaskList([...taskList])
+								// taskList.push({check:false,content:"",id:taskList.length});
+								// setTaskList([...taskList])
+								setTaskList(prev=>{
+									return [...prev,{check:false,content:"",id:taskList.length}]
+								})
 							}
 						}></input>
 					</label>
