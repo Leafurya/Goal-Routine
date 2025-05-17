@@ -1,0 +1,19 @@
+/* :root {
+  --main-bg-color: #F4F6FA;
+  --card-bg-color: #FFFFFF;
+  --card-text-color: #1E1E1E;
+  --button-bg-color: #6C63FF;
+  --button-text-color: #FFFFFF;
+} */
+:root {
+  --bg-color: #ECE8F6;
+  --card-bg-color: #FFFFFF;
+  --card-text-color: #3E2F50;
+  --button-bg-color: #7C3AED;
+  --button-text-color: #FFFFFF;
+  --button-checked-bg-color: #5B21B6;
+
+  --card-shadow: 0 6px 16px rgba(90, 50, 150, 0.15);
+  --header-text-color:#3D2E53;
+  --header-bg-color: #DDD6F3;
+}

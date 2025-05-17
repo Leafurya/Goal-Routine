@@ -40,11 +40,19 @@ function CreateV3({}){
 	useEffect(()=>{
 	},[])
 
+	const DeleteItemGroup=(groupId)=>{
+		// ProjectModule.DeleteItemGroup(id,groupId);
+		delete items[groupId];
+		items.splice(groupId,1);
+		taskGroupCount[type]--
+		setTaskGroupConut({...taskGroupCount})
+	}
+
 	const CreateTaskGroup=()=>{
 		//할 일 그룹들 생성성
 		let cards=[]
 		for(let i=0;i<taskGroupCount[type];i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`}></TaskCard>)
+			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`} deleteHandler={DeleteItemGroup}></TaskCard>)
 		}
 		return (cards)
 	}
@@ -184,15 +192,27 @@ function CreateV3({}){
 						<ul style={{padding:0}}>
 							{CreateTaskGroup()}
 							{
+								type==="todo"?(""):(
+								<>
+								<label className="add_group card">
+									<header>+</header>
+									<input style={{display:"none"}} type="button" value="그룹 추가" onClick={()=>{
+										taskGroupCount[type]++
+										setTaskGroupConut({...taskGroupCount})
+									}}></input>
+								</label>
+								</>)
+							}
+							{
 								type==="-"?(<TaskCard name={"lastitems"} tasks={items} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
 							}
 						</ul>
-						<div>
+						{/* <div>
 							<input type="button" value="그룹 추가" onClick={()=>{
 								taskGroupCount[type]++
 								setTaskGroupConut({...taskGroupCount})
 							}}></input>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</form>
@@ -280,13 +300,21 @@ export function Modify(){
 		disabled=true;
 	}
 
+	const DeleteItemGroup=(groupId)=>{
+		// ProjectModule.DeleteItemGroup(id,groupId);
+		delete items[groupId];
+		items.splice(groupId,1);
+		setTaskGroupConut(taskGroupCount-1);
+	}
+
 	const CreateTaskGroup=()=>{
 		let cards=[];
 		for(let i=1;i<taskGroupCount;i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`}></TaskCard>);
+			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`} deleteHandler={DeleteItemGroup}></TaskCard>);
 		}
 		return (cards);
 	}
+	
 
 	return(
 		<div className="borad">
@@ -301,6 +329,18 @@ export function Modify(){
 						<ul style={{padding:0}}>
 							{CreateTaskGroup()}
 							{
+								type==="todo"?(""):(
+								<>
+								<label className="add_group card">
+									<header>+</header>
+									<input style={{display:"none"}} type="button" value="그룹 추가" onClick={()=>{
+										let temp=taskGroupCount+1;
+										setTaskGroupConut(temp);
+									}}></input>
+								</label>
+								</>)
+							}
+							{
 								type==="-"?(<TaskCard name={"lastitems"} tasks={items} groupId={0} title="마지막 날 할 일 그룹"></TaskCard>):""
 							}
 						</ul>
@@ -308,10 +348,10 @@ export function Modify(){
 							{
 								type==="todo"?(""):(
 								<>
-									<input type="button" value="그룹 추가" onClick={()=>{
+									{/* <input type="button" value="그룹 추가" onClick={()=>{
 										let temp=taskGroupCount+1;
 										setTaskGroupConut(temp);
-									}}></input>
+									}}></input> */}
 									<input type="button" value="삭제" onClick={()=>{
 										ProjectModule.RemoveProject(id);
 										navigate(-1);

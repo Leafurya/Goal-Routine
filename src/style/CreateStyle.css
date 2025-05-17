@@ -1,3 +1,4 @@
+@import "./var.css";
 .info_part{
 	display: flex;
 	flex-direction: column;
@@ -67,13 +68,19 @@
 	display: flex;	
 	justify-content: center;
 	align-items: center;
-	background-color: #AF7EEB;
+	/* background-color: #AF7EEB; */
+	background-color: var(--button-bg-color);
 	margin:10px;
 	padding:10px 0;
-	color:white;
+	color:var(--button-text-color);
+	/* color:white; */
 	font-size: large;
 }
 
 .page_create.function_btns label input{
 	display: none;
+}
+.add_group{
+	display: inline-block;
+	width:100%;
 }

@@ -136,6 +136,11 @@ function ToFront(prjID){
 
 	console.log("tofront",projects);
 }
+function DeleteItemGroup(prjId,groupId){
+	console.log(groupId,"deleted");
+	projects[prjId].deleteItemGroup(groupId);
+	console.log(projects[prjId].getProps());
+}
 
 const ProjectModule={
 	CreateProject,
@@ -149,7 +154,8 @@ const ProjectModule={
 	GetDaysBetween,
 	GetProjectPropsById,
 	CheckItem,
-	ToFront
+	ToFront,
+	DeleteItemGroup
 };
 
 export default ProjectModule;

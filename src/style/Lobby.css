@@ -4,8 +4,10 @@
 	flex: 1;
 }
 .project_list_ul{
-	margin: 0;
-	padding: 10px;
+	margin: 0px;
+	/* padding:0; */
+	padding: 10px 10px 60px 10px;
+
 	width: 100%;
 	box-sizing: border-box;
 
@@ -14,7 +16,7 @@
 	flex: 17;
 	flex-wrap:nowrap;
 
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 	overflow-x: hidden;
 
 }
@@ -33,8 +35,15 @@
 	align-items: center;
 	justify-content: center;
 	/* background-color: #947fda; */
-	background-color: #AF7EEB;
-	
+	/* background-color: #AF7EEB; */
+	background-color: var(--button-bg-color);
+	position:fixed;
+	bottom:15px;
+	right:15px;
+	width:50px;
+	height:50px;
+	border-radius: 10px;
+	opacity: .8;
 }
 
 /* .project_list_li input{

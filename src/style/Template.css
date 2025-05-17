@@ -1,7 +1,9 @@
-.pattern_background{
+@import "./var.css";
+/* .pattern_background{
 	background: radial-gradient( #775cd2, #856fce);
-}
+} */
 .base_style{
 	/* color: white; */
-	color: white !important;
+	color: var(--button-text-color) !important;
+	/* color: white !important; */
 }

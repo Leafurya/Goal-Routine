@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {ProjectLists} from "./sub-compo/LobbySubCompos.js";
+import { FaPlus } from 'react-icons/fa';
 
 import ProjectModule from "../modules/Project/Interface.js";
 
@@ -30,14 +31,21 @@ function Lobby(){
 	return (
 		<div className="borad">
 			<ProjectLists prjIDs={projectIDs}></ProjectLists>
-			<div style={{padding:"15px"}}>
-					<input style={{display:"none"}} type="button" id="create_btn" onClick={()=>{
-						navigate("/Create")
-					}}></input>
-					<label htmlFor="create_btn" className="plus_btn label_base">
-						<div className="plus_btn_value base_style">+</div>
-					</label>
-			</div>
+			<label className="plus_btn label_base">
+				{/* <div className="plus_btn_value base_style">+</div> */}
+				<FaPlus style={{ color: '#fff', fontSize: '19px' }} />
+				<input style={{display:"none"}} type="button" id="create_btn" onClick={()=>{
+					navigate("/Create")
+				}}></input>
+			</label>
+			{/* <div style={{padding:"15px"}}>
+				<input style={{display:"none"}} type="button" id="create_btn" onClick={()=>{
+					navigate("/Create")
+				}}></input>
+				<label htmlFor="create_btn" className="plus_btn label_base">
+					<div className="plus_btn_value base_style">+</div>
+				</label>
+			</div> */}
 		</div>
 	);
 }

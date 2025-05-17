@@ -44,7 +44,7 @@ function ProjectCard({prjID,refresher}){
 				top:0,
 				right:0,
 				textAlign:"center",
-				// background:"none",
+				background:"none",
 				border:"none"
 			}} value="↑" onClick={()=>{
 				ProjectModule.ToFront(id);

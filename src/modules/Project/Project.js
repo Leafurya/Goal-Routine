@@ -165,4 +165,8 @@ export default class Project{
 		let groupIdx=this.getNowItemsIdx();
 		this.#items[groupIdx][itemID].check=!this.#items[groupIdx][itemID].check;
 	}
+	deleteItemGroup(id){
+		delete this.#items[id];
+		this.#items.splice(id,1);
+	}
 }
