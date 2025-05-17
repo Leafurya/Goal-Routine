@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "./TextInput";
+import { FaTrash } from 'react-icons/fa';
 
 function TaskInput({id,content,onDelete,onChange,name}){
 	
@@ -17,9 +18,12 @@ function TaskInput({id,content,onDelete,onChange,name}){
 	)
 }
 
-export default ({title,groupId,tasks,name,className})=>{
+export default ({title,groupId,tasks,name,className,deleteHandler})=>{
 	const[taskList,setTaskList]=useState(tasks[groupId]??[])
 	
+	console.log("groupid",groupId,"taskList",taskList,"tasks[groupId]",tasks[groupId])
+
+
 	useEffect(()=>{
 		console.log("taskList.length",taskList.length)
 		// document.querySelector(`#group_${groupId} ul.task_list`)?.childNodes[taskList.length-1]?.querySelector("textarea").focus()
@@ -27,7 +31,7 @@ export default ({title,groupId,tasks,name,className})=>{
 	},[taskList])
 
 	return(
-		<div id={"group_"+groupId} style={{backgroundColor:"white",marginTop:"10px"}} className={"card "+className}>
+		<div id={"group_"+groupId} style={{backgroundColor:"white",marginTop:"10px",position:"relative"}} className={"card "+className}>
 			<header style={{
 				fontSize:"large",
 				textAlign:"center",
@@ -70,6 +74,50 @@ export default ({title,groupId,tasks,name,className})=>{
 					</label>
 				</div>
 			</div>
+			{
+				groupId>2?(
+				<label style={{
+					position:"absolute",
+					display:("inline-block"),
+					width:"25px",
+					top:0,
+					right:0,
+					textAlign:"center",
+					background:"none",
+					border:"none",
+				}}>
+				<FaTrash style={{ color: '#9446C4', fontSize: '18px' }} />
+				<input type="button" style={{
+					display:"none"
+				}} onClick={()=>{
+					deleteHandler(groupId)
+					setTaskList([...tasks[groupId]])
+					// console.log("tasks[groupId]",tasks[groupId])
+					// ProjectModule.ToFront(id);
+					// ProjectModule.SavePorjects();
+					// refresher([]);
+				}}></input>
+			</label>):""
+			}
+			
+			{/* {
+				groupId!==1?(
+				<button onClick={()=>{
+					console.log("hellor")
+				}} style={{
+				position:"absolute",
+				display:("inline-block"),
+				width:"25px",
+				top:4,
+				right:4,
+				textAlign:"center",
+				background:"none",
+				border:"none"
+			}}>
+				<FaTrash style={{ color: '#9446C4', fontSize: '18px' }} />
+			</button>):""
+			} */}
+			
 		</div>
 	)
 }

@@ -11,6 +11,8 @@ import { Delete } from './component/Delete.js';
 import { Toast } from './component/Notices.js';
 
 import ProjectModule from './modules/Project/Interface.js'
+import Header from "./component/Header.js";
+import Headroom from 'react-headroom';
 
 function App() {
 	const [re,refresh]=useState([])
@@ -38,6 +40,10 @@ function App() {
 	return (
 			
 		<div className="App">
+			<Headroom>
+				<Header></Header>
+				{/* <header className="my-header">스크롤하면 숨겨짐</header> */}
+			</Headroom>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Lobby/>}></Route>

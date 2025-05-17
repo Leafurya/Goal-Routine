@@ -1,10 +1,11 @@
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+@import "./style/var.css";
 body{
 	position: absolute;
 	height: 100%;
 	width: 100%;
 	font-size: x-large;
-	overflow:hidden;
+	/* overflow:hidden; */
 	/* font-family: 'Jeju Gothic', sans-serif; */
 	font-family: "Pretendard";
 	font-weight: 700;
@@ -14,6 +15,7 @@ body{
 	-moz-user-select: -moz-none !important;
 	-ms-user-select: none !important;
 	user-select: none !important;
+	overflow-y: scroll;
 }
 li{
 	list-style: none;
@@ -21,10 +23,14 @@ li{
 .App{
 	display: flex;
 	position: absolute;
-	overflow:hidden;
-	height: 100%;
+	/* overflow:hidden; */
+	height: 100vh;
 	width: 100%;
-	background-color: #E3E9FF;
+	background-color: var(--bg-color);
+	/* background-color: #E3E9FF; */
+	/* background-color: #fff; */
+	flex-direction: column;
+	overflow-y: scroll;
 	/* background-color: #7965bd; */
 }
 textarea,input{
@@ -32,4 +38,21 @@ textarea,input{
 	font-family: "Pretendard";
 	font-weight: 600;
 	/* height: 1.5em; */
+}
+
+.app_header{
+	/* background-color: var(--header-bg-color); */
+	color:var(--header-text-color) !important; 
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+
+	height: 50px;
+
+
+	/* box-shadow: 0 2px 4px var(--header-bg-color); */
+}
+.app_header .title{
+	display: inline-block;
+	padding-left:20px;
 }
