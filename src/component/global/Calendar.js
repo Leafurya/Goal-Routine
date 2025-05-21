@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../../style/CalendarStyle.css"
+import { FaCaretLeft,FaCaretRight } from "react-icons/fa";
 
 /**
  * 
@@ -71,19 +72,32 @@ export default ({select,fontSize,textAlign,children,onChange,start,end,min})=>{
 		<table style={{fontSize:"small"}} id="calendar">
 			<thead>
 				<tr>
-					<td className="month" colSpan={7}>
-						<input type="button" value="<" onClick={()=>{
-							date.setMonth(date.getMonth()-1)
-							setDate(new Date(date))
-						}}></input>
-						{`${year}년 ${month+1}월`}
-						<input type="button" value=">" onClick={()=>{
-							date.setMonth(date.getMonth()+1)
-							setDate(new Date(date))
-						}}></input>
-						<input type="button" value={today.getDate()} onClick={()=>{
-							setDate(new Date(today))
-						}}></input>
+					<td colSpan={7}>
+						<div className="month">
+							<label className="move_month">
+								<input style={{display:"none"}} type="button" onClick={()=>{
+									date.setMonth(date.getMonth()-1)
+									setDate(new Date(date))
+								}}></input>
+								<FaCaretLeft></FaCaretLeft>
+							</label>
+							<div>
+								{`${year}년 ${month+1}월`}
+							</div>
+							<label className="move_month">
+								<input style={{display:"none"}} type="button" onClick={()=>{
+									date.setMonth(date.getMonth()+1)
+									setDate(new Date(date))
+								}}></input>
+								<FaCaretRight></FaCaretRight>
+							</label>
+							<label className="goto_today">
+								<input type="button" value={today.getDate()} onClick={()=>{
+									setDate(new Date(today))
+								}}></input>
+								{today.getDate()}
+							</label>
+						</div>
 					</td>
 				</tr>
 				<tr>

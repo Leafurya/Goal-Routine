@@ -4,6 +4,7 @@
 	flex:1;
 	/* overflow: auto; */
 	flex-direction: column;
+	overflow-y: scroll;
 	width: 100%;
 }
 .borad .main_platform{

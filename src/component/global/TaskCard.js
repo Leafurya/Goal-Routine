@@ -75,7 +75,7 @@ export default ({title,groupId,tasks,name,className,deleteHandler})=>{
 				</div>
 			</div>
 			{
-				groupId>2?(
+				groupId>1?(
 				<label style={{
 					position:"absolute",
 					display:("inline-block"),
@@ -91,7 +91,10 @@ export default ({title,groupId,tasks,name,className,deleteHandler})=>{
 					display:"none"
 				}} onClick={()=>{
 					deleteHandler(groupId)
-					setTaskList([...tasks[groupId]])
+					console.log("groupId",tasks[groupId])
+					if(tasks[groupId]!==undefined){
+						setTaskList([...tasks[groupId]])
+					}
 					// console.log("tasks[groupId]",tasks[groupId])
 					// ProjectModule.ToFront(id);
 					// ProjectModule.SavePorjects();

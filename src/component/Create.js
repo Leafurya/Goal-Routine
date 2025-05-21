@@ -11,6 +11,7 @@ import Calendar from './global/Calendar.js';
 import TaskCard from './global/TaskCard.js';
 
 import ProjectModule from '../modules/Project/Interface.js';
+import { FaArrowRight } from "react-icons/fa";
 
 function CreateV3({}){
 	//프로젝트 생성 컴포넌트트
@@ -88,19 +89,25 @@ function CreateV3({}){
 							D-Day
 						</label>
 					</div>
-					<div style={{backgroundColor:"white"}}>
+					<div>
 						{
 							type==="+"?(
 								<>
-									<div>
-										D+{ProjectModule.GetDaysBetween(start,today)+1}
-									</div>
-									<div>
-										<input name={"start"} style={{display:"none"}} id="start_date" type="text" defaultValue={start}></input>
-										<label htmlFor='start_date'>
-											시작 날짜: {start}
+									<div className="create_d_type">
+										<label>
+											D+{ProjectModule.GetDaysBetween(start,today)+1}
 										</label>
 									</div>
+									<div className="create_date">
+										<div>
+											<input name={"start"} style={{display:"none"}} id="start_date" type="text" defaultValue={start} onClick={()=>{
+											}}></input>
+											<label htmlFor='start_date'>
+													{start.split(".")[0]}년 {start.split(".")[1]}월 {start.split(".")[2]}일 시작
+											</label>
+										</div>
+									</div>
+									
 									<div className='day_pick'>
 										<div>
 											<Calendar start={new Date(start)} onChange={(date)=>{
@@ -119,7 +126,7 @@ function CreateV3({}){
 								</>
 							):(
 								<>
-									<div>
+									<div className="create_d_type">
 										<label htmlFor='prj_day'>
 											D-<span >{ProjectModule.GetDaysBetween(start,end??start)}</span>
 										</label>
@@ -148,19 +155,36 @@ function CreateV3({}){
 											refresh([]);
 										}}></input>
 									</div>
-									<div>
-										<input name={"start"} style={{display:"none"}} id="start_date" type="text" defaultValue={start} onClick={()=>{
-										}}></input>
-										<label  htmlFor='start_date'>
-											시작 날짜: {start}
-										</label>
-									</div>
-									<div>
-										<input name={"end"} style={{display:"none"}} id="end_date" type="text" defaultValue={end??start} onClick={()=>{
-										}}></input>
-										<label  htmlFor='end_date'>
-											종료 날짜: {end??""}
-										</label>
+									<div className="create_date">
+										<div>
+											<input name={"start"} style={{display:"none"}} id="start_date" type="text" defaultValue={start} onClick={()=>{
+											}}></input>
+											<label htmlFor='start_date'>
+												<div>
+													{start.split(".")[0]}년
+												</div>
+												<div>
+													{start.split(".")[1]}월 {start.split(".")[2]}일
+												</div>
+											</label>
+										</div>
+										<FaArrowRight></FaArrowRight>
+										<div>
+											<input name={"end"} style={{display:"none"}} id="end_date" type="text" defaultValue={end??start} onClick={()=>{
+											}}></input>
+											<label htmlFor='end_date'>
+												{end?(
+												<>
+													<div>
+														{end.split(".")[0]}년
+													</div>
+													<div>
+														{end.split(".")[1]}월 {end.split(".")[2]}일
+													</div>
+												</>
+												):""}
+											</label>
+										</div>
 									</div>
 									<div className='day_pick'>
 										<div>
@@ -320,6 +344,22 @@ export function Modify(){
 		<div className="borad">
 			<form className='main_platform'>
 				<div className='type_pick'>
+					{
+						type==="todo"?(""):(
+						<>
+							{/* <input type="button" value="그룹 추가" onClick={()=>{
+								let temp=taskGroupCount+1;
+								setTaskGroupConut(temp);
+							}}></input> */}
+							<label className="delete_project">
+								<input style={{display:"none"}} type="button" value="삭제" onClick={()=>{
+									ProjectModule.RemoveProject(id);
+									navigate(-1);
+								}}></input>
+								<span>프로젝트 삭제</span>
+							</label>
+						</>)
+					}
 					<div className="title">
 						<TextInput disabled={disabled} name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
 							title=event.target.value
@@ -345,19 +385,7 @@ export function Modify(){
 							}
 						</ul>
 						<div>
-							{
-								type==="todo"?(""):(
-								<>
-									{/* <input type="button" value="그룹 추가" onClick={()=>{
-										let temp=taskGroupCount+1;
-										setTaskGroupConut(temp);
-									}}></input> */}
-									<input type="button" value="삭제" onClick={()=>{
-										ProjectModule.RemoveProject(id);
-										navigate(-1);
-									}}></input>
-								</>)
-							}
+							
 							
 						</div>
 					</div>
