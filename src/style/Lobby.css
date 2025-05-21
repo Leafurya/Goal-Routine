@@ -6,17 +6,18 @@
 .project_list_ul{
 	margin: 0px;
 	/* padding:0; */
+	/* height:100%; */
 	padding: 10px 10px 60px 10px;
 
 	width: 100%;
 	box-sizing: border-box;
 
 	display: flex;
-	flex-direction: column;
-	flex: 17;
 	flex-wrap:nowrap;
+	flex-direction: column;
+	/* flex: auto; */
 
-	/* overflow-y: scroll; */
+	overflow-y: scroll;
 	overflow-x: hidden;
 
 }

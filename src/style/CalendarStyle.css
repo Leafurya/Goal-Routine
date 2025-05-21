@@ -1,3 +1,5 @@
+@import "./var.css";
+
 #calendar .week_cell{
 	text-align: center;
 	background-color: #d1bbeb;
@@ -7,6 +9,28 @@
 	text-align: center;
 	background-color: #d1bbeb;
 	color:black;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+    align-items: center;
+	padding:3px 0;
+}
+#calendar .month .move_month{
+	display: flex;
+	font-size: large;
+	padding: 0 5px;
+}
+#calendar .month .goto_today{
+	border: 2px solid gray;
+	border-radius: 5px;
+	padding:2px;
+}
+#calendar .month .goto_today>input{
+	display: none;
+}
+#calendar .month label{
+	flex:0;
+	padding:0;
 }
 #calendar .sunday{
 	color: red;

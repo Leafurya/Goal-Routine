@@ -40,10 +40,7 @@ function App() {
 	return (
 			
 		<div className="App">
-			<Headroom>
-				<Header></Header>
-				{/* <header className="my-header">스크롤하면 숨겨짐</header> */}
-			</Headroom>
+			<Header></Header>
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Lobby/>}></Route>
