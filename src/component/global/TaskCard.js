@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TextInput from "./TextInput";
-import { FaTrash } from 'react-icons/fa';
+import { FaArrowUp, FaTrash } from 'react-icons/fa';
 
 function TaskInput({id,content,onDelete,onChange,name}){
 	
@@ -18,14 +18,15 @@ function TaskInput({id,content,onDelete,onChange,name}){
 	)
 }
 
-export default ({title,groupId,tasks,name,className,deleteHandler})=>{
+export default ({title,groupId,tasks,name,className,deleteHandler,toFrontHandler,refreshed})=>{
 	const[taskList,setTaskList]=useState(tasks[groupId]??[])
 	
-	console.log("groupid",groupId,"taskList",taskList,"tasks[groupId]",tasks[groupId])
-
+	console.log("groupid",groupId,"\ntaskList",taskList,"\ntasks[groupId]",tasks[groupId])
 
 	useEffect(()=>{
-		console.log("taskList.length",taskList.length)
+		setTaskList(tasks[groupId]??[])
+	},[refreshed])
+	useEffect(()=>{
 		// document.querySelector(`#group_${groupId} ul.task_list`)?.childNodes[taskList.length-1]?.querySelector("textarea").focus()
 		tasks[groupId]=taskList;
 	},[taskList])
@@ -74,34 +75,43 @@ export default ({title,groupId,tasks,name,className,deleteHandler})=>{
 					</label>
 				</div>
 			</div>
-			{
-				groupId>1?(
-				<label style={{
-					position:"absolute",
-					display:("inline-block"),
-					width:"25px",
-					top:0,
-					right:0,
-					textAlign:"center",
-					background:"none",
-					border:"none",
-				}}>
-				<FaTrash style={{ color: '#9446C4', fontSize: '18px' }} />
-				<input type="button" style={{
-					display:"none"
-				}} onClick={()=>{
-					deleteHandler(groupId)
-					console.log("groupId",tasks[groupId])
-					if(tasks[groupId]!==undefined){
-						setTaskList([...tasks[groupId]])
-					}
-					// console.log("tasks[groupId]",tasks[groupId])
-					// ProjectModule.ToFront(id);
-					// ProjectModule.SavePorjects();
-					// refresher([]);
-				}}></input>
-			</label>):""
-			}
+			<div style={{
+				position:"absolute",
+				display:("inline-block"),
+				top:0,
+				right:0,
+				textAlign:"center",
+				background:"none",
+				border:"none",
+			}}>
+				{
+					groupId>1?(
+					<label style={{display:"inline-block"}}>
+						<FaTrash style={{ color: '#9446C4', fontSize: '18px' }} />
+						<input type="button" style={{
+							display:"none"
+						}} onClick={()=>{
+							deleteHandler(groupId)
+							console.log("groupId",tasks[groupId])
+							if(tasks[groupId]!==undefined){
+								setTaskList([...tasks[groupId]])
+							}
+						}}></input>
+					</label>):""
+				}
+				{
+					groupId>0?(
+					<label style={{display:"inline-block"}}>
+						<FaArrowUp style={{ color: '#9446C4', fontSize: '18px' }} />
+						<input type="button" style={{
+							display:"none"
+						}} onClick={()=>{
+							console.log("groupId",groupId)
+							toFrontHandler(groupId);
+						}}></input>
+					</label>):""
+				}
+			</div>
 			
 			{/* {
 				groupId!==1?(
