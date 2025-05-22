@@ -14,7 +14,7 @@ import ProjectModule from '../modules/Project/Interface.js';
 import { FaArrowRight } from "react-icons/fa";
 
 function CreateV3({}){
-	//프로젝트 생성 컴포넌트트
+	//프로젝트 생성 컴포넌트
 	const today=new Date()
 
 	const projectDataRef=useRef({
@@ -28,7 +28,7 @@ function CreateV3({}){
 	let {title,type,start,end,items}=projectData;
 
 	if(!end){
-		//end에 값 추가가
+		//end에 값 추가
 		let t=new Date();
 		t.setDate(today.getDate()+1);
 		end=t.toLocaleDateString();
@@ -48,15 +48,35 @@ function CreateV3({}){
 		taskGroupCount[type]--
 		setTaskGroupConut({...taskGroupCount})
 	}
+	const ToFront=(groupId)=>{
+		let target=items[groupId];
+
+		for(;groupId>1;groupId--){
+			items[groupId]=items[groupId-1]
+		}
+		items[1]=target;
+
+		// setTaskGroupConut({...taskGroupCount})
+		refresh([])
+	}
 
 	const CreateTaskGroup=()=>{
 		//할 일 그룹들 생성성
 		let cards=[]
 		for(let i=0;i<taskGroupCount[type];i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i+1} name={"items"} key={type+(i+1)} title={`할 일 그룹 ${i+1}`} deleteHandler={DeleteItemGroup}></TaskCard>)
+			cards.push(<TaskCard className={"itemGroup"}
+				tasks={items} 
+				groupId={i+1} 
+				name={"items"} 
+				key={type+(i+1)} 
+				title={`할 일 그룹 ${i+1}`} 
+				deleteHandler={DeleteItemGroup}
+				toFrontHandler={ToFront}
+				refreshed={re}></TaskCard>)
 		}
 		return (cards)
 	}
+	let isDev=process.env.NODE_ENV==="development";
 
 	return(
 		<div className="borad">
@@ -210,6 +230,7 @@ function CreateV3({}){
 					</div>
 					<div className="title">
 						<TextInput name={"title"} placeholder={'제목'} className={"input"} data={"task_input"} value={title} id="input_for_title" onChange={(event)=>{
+							projectDataRef.current.title=event.target.value
 						}} style={{color:"black",width:"100%",boxSizing:"border-box",textAlign:"center"}}></TextInput>
 					</div>
 					<div className="task_inputs">
@@ -255,8 +276,16 @@ function CreateV3({}){
 						const formData = new FormData(form);
 						const data = Object.fromEntries(formData.entries());
 
+						if(isDev){
+							if(data.title.length===0){
+								toastRef.SetMessage("제목을 지정해 주세요.");
+								return;
+							}
+						}
+
 						data.end=end;
 						data.start=start;
+
 						
 						//마지막 할 일 그룹 데이터 저장
 						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
@@ -270,10 +299,23 @@ function CreateV3({}){
 
 						//할 일 그룹 데이터 저장
 						let itemGroups=document.querySelectorAll("div.itemGroup");
+
 						for(let i=0;i<itemGroups.length;i++){
 							data.items.push([])
 							let items=itemGroups[i].querySelectorAll("textarea[name=items]");
+							if(isDev){
+								if(items.length===0){
+									toastRef.SetMessage("할 일을 입력해 주세요.");
+									return;
+								}
+							}
 							for(let j=0;j<items.length;j++){
+								if(isDev){
+									if(items[j].value.length===0){
+										toastRef.SetMessage("할 일을 입력해 주세요.");
+										return;
+									}
+								}
 								data.items[i+1].push({
 									content:items[j].value,
 									check:false
@@ -310,6 +352,7 @@ export function Modify(){
 	const projectData=projectDataRef.current;
 	let {id,title,type,start,end,items,state}=projectData;
 	const [taskGroupCount,setTaskGroupConut]=useState(items.length);
+	const [_,refresh]=useState([]);
 	let disabled=false;
 
 	if(ID===undefined || ID===null){
@@ -323,6 +366,7 @@ export function Modify(){
 		title="오늘 할 일";
 		disabled=true;
 	}
+	let isDev=process.env.NODE_ENV==="development";
 
 	const DeleteItemGroup=(groupId)=>{
 		// ProjectModule.DeleteItemGroup(id,groupId);
@@ -330,11 +374,23 @@ export function Modify(){
 		items.splice(groupId,1);
 		setTaskGroupConut(taskGroupCount-1);
 	}
+	const ToFront=(groupId)=>{
+		let target=items[groupId];
+
+		for(;groupId>1;groupId--){
+			items[groupId]=items[groupId-1]
+		}
+		items[1]=target;
+		console.log("items ToFront",groupId,items)
+
+		refresh([]);
+	}
 
 	const CreateTaskGroup=()=>{
 		let cards=[];
 		for(let i=1;i<taskGroupCount;i++){
-			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`} deleteHandler={DeleteItemGroup}></TaskCard>);
+			cards.push(<TaskCard className={"itemGroup"} tasks={items} groupId={i} name={"items"} key={type+(i)} title={`할 일 그룹 ${i}`} 
+			deleteHandler={DeleteItemGroup} toFrontHandler={ToFront} refreshed={_}></TaskCard>);
 		}
 		return (cards);
 	}
@@ -392,12 +448,12 @@ export function Modify(){
 				</div>
 			</form>
 			<div className='page_create function_btns'>
-				{/* <label>
+				<label>
 					<div>뒤로가기</div>
 					<input type="button" onClick={()=>{
 						navigate(-1)
 					}}></input>
-				</label> */}
+				</label>
 				<label>
 					<div>저장</div>
 					<input type="button" onClick={()=>{
@@ -407,6 +463,13 @@ export function Modify(){
 
 						let lastItems=document.querySelectorAll('textarea[name=lastitems]');
 						data.items=[[]]
+
+						if(isDev){
+							if(data.title.length===0){
+								toastRef.SetMessage("제목을 지정해 주세요.");
+								return;
+							}
+						}
 
 						let nowItemGroup=items[0];
 						nowItemGroup=nowItemGroup.filter(Boolean); //undefined 등 비정상 값을 필터링 
@@ -429,10 +492,19 @@ export function Modify(){
 						for(let i=0;i<itemGroups.length;i++){
 							data.items.push([])
 							let _items=itemGroups[i].querySelectorAll("textarea[name=items]");
+							if(isDev){
+								if(_items.length===0){
+									toastRef.SetMessage("할 일을 입력해 주세요.");
+									return;
+								}
+							}
 							nowItemGroup=items[i+1];
 							nowItemGroup=nowItemGroup.filter(Boolean);
+							console.log("nowItemGroup",nowItemGroup)
+							
 							nowItemGroup.map((item,idx)=>{
-								if(_items[idx].value!==""){
+								console.log("_items[idx].value.length",idx,_items[idx].value.length!==0);
+								if(_items[idx].value.length!==0){
 									let check;
 									try{
 										check=item?.check??false;
@@ -445,6 +517,12 @@ export function Modify(){
 									});
 								}
 							});
+							if(isDev){
+								if(data.items[i+1].length===0){
+									toastRef.SetMessage("할 일을 입력해 주세요.");
+									return;
+								}
+							}
 						}
 						data.id=id;
 						data.type=type;

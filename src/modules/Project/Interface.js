@@ -133,11 +133,16 @@ function ToFront(prjID){
 	}
 	projects[1]=target;
 	projects[1].setID(1);
+}
+function ItemGroupToFront(items,groupID){
+	let target=items[groupID];
 
-	console.log("tofront",projects);
+	for(;groupID>1;groupID--){
+		items[groupID]=items[groupID-1]
+	}
+	items[1]=target;
 }
 function DeleteItemGroup(prjId,groupId){
-	console.log(groupId,"deleted");
 	projects[prjId].deleteItemGroup(groupId);
 	console.log(projects[prjId].getProps());
 }
@@ -155,7 +160,8 @@ const ProjectModule={
 	GetProjectPropsById,
 	CheckItem,
 	ToFront,
-	DeleteItemGroup
+	DeleteItemGroup,
+	ItemGroupToFront
 };
 
 export default ProjectModule;

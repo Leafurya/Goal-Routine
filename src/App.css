@@ -2,6 +2,7 @@
 @import "./style/var.css";
 html{
 	height: 100%;
+	overflow:hidden;
 }
 body{
 	
