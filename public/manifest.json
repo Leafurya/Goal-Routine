@@ -1,6 +1,6 @@
 {
   "short_name": "목표와반복",
-  "name":"목표와 반복",
+  "name": "목표와 반복",
   "icons": [
     {
       "src": "applogo.ico",
@@ -22,5 +22,16 @@
   "display": "standalone",
   "orientation": "portrait",
   "theme_color": "#000",
-  "background_color": "#947fda"
+  "background_color": "#947fda",
+  "id": "/goal-and-routine/",
+  "description": "매일 반복되는 할 일을 더 이상 매번 적지 마세요. '목표와반복'은 D-day 프로젝트와 투두리스트를 함께 관리할 수 있는 앱으로, 반복 작업도 효율적으로 기록하고 실천할 수 있도록 도와줍니다.",
+  "scope": "/",
+  "lang": "ko",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
+  "categories": [
+    "productivity"
+  ]
 }
