@@ -22,7 +22,11 @@ function Task({task,idTree}){
 					}
 				}}></input>
 				<span className='check_box'></span>
-				<span style={{width:"90%"}}>&nbsp;{`${content}`}&nbsp;</span>
+				<span style={{
+					width:"90%",
+					wordBreak: "keep-all",
+					overflowWrap: "break-word",
+				}}>&nbsp;{`${content}`}&nbsp;</span>
 			</label>
 		</li>
 	)

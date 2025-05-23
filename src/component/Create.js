@@ -23,7 +23,7 @@ function CreateV3({}){
 		start:today.toLocaleDateString(),
 		end:null,
 		items:[]
-	}); //프로젝트 속성 값 초기화. 프로젝트 생성이기 때문에 id를 지정할 필요 없음음
+	}); //프로젝트 속성 값 초기화. 프로젝트 생성이기 때문에 id를 지정할 필요 없음
 	const projectData=projectDataRef.current;
 	let {title,type,start,end,items}=projectData;
 
