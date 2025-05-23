@@ -28,8 +28,8 @@
   "scope": "/",
   "lang": "ko",
   "display_override": [
-    "window-controls-overlay",
-    "standalone"
+	"standalone",
+    "window-controls-overlay"
   ],
   "categories": [
     "productivity"
